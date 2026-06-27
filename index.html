@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบ HR ฟาร์ม</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <i class="fas fa-tractor"></i>
+      <h1>ระบบ HR ฟาร์ม</h1>
+      <p>Human Resource Management System</p>
+    </div>
+    <button id="btn-login" class="btn-google">
+      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" width="20" />
+      เข้าสู่ระบบด้วย Google
+    </button>
+    <p id="login-error" class="login-error hidden"></p>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app" class="app hidden">
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <i class="fas fa-tractor sidebar-logo"></i>
+      <div>
+        <h2>HR ฟาร์ม</h2>
+        <span>Farm HR System</span>
+      </div>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li><a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i><span>ภาพรวม</span></a></li>
+      <li><a href="#" class="menu-item" data-page="employees"><i class="fas fa-users"></i><span>พนักงาน</span></a></li>
+      <li><a href="#" class="menu-item" data-page="attendance"><i class="fas fa-clock"></i><span>เวลาทำงาน</span></a></li>
+      <li><a href="#" class="menu-item" data-page="salary"><i class="fas fa-money-bill-wave"></i><span>เงินเดือน</span></a></li>
+      <li><a href="#" class="menu-item" data-page="performance"><i class="fas fa-star"></i><span>ประเมินผล</span></a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="user-info" id="user-info">
+        <img id="user-avatar" src="" alt="avatar" class="avatar" />
+        <div>
+          <p id="user-name">-</p>
+          <small id="user-email">-</small>
+        </div>
+      </div>
+      <button id="btn-logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="topbar">
+      <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+      <h2 id="page-title">ภาพรวม</h2>
+      <div class="topbar-actions">
+        <span id="last-sync" class="sync-info"></span>
+        <button class="btn-icon" id="btn-refresh" title="รีเฟรชข้อมูล"><i class="fas fa-sync-alt"></i></button>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>กำลังโหลดข้อมูล...</p>
+    </div>
+
+    <!-- ===== DASHBOARD PAGE ===== -->
+    <section id="page-dashboard" class="page active">
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <h3 id="stat-total-emp">-</h3>
+            <p>พนักงานทั้งหมด</p>
+          </div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+          <div class="stat-info">
+            <h3 id="stat-present">-</h3>
+            <p>มาทำงานวันนี้</p>
+          </div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-icon"><i class="fas fa-user-times"></i></div>
+          <div class="stat-info">
+            <h3 id="stat-absent">-</h3>
+            <p>ขาด/ลาวันนี้</p>
+          </div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon"><i class="fas fa-baht-sign"></i></div>
+          <div class="stat-info">
+            <h3 id="stat-salary">-</h3>
+            <p>ค่าจ้างเดือนนี้</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-user-clock"></i> สถานะวันนี้</h3>
+            <span id="today-date" class="badge badge-blue"></span>
+          </div>
+          <div id="today-attendance-list" class="mini-list">
+            <p class="empty-msg">ไม่มีข้อมูล</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-star"></i> ประเมินล่าสุด</h3>
+          </div>
+          <div id="recent-performance-list" class="mini-list">
+            <p class="empty-msg">ไม่มีข้อมูล</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EMPLOYEES PAGE ===== -->
+    <section id="page-employees" class="page hidden">
+      <div class="page-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="emp-search" placeholder="ค้นหาพนักงาน..." />
+        </div>
+        <button class="btn btn-primary" id="btn-add-employee">
+          <i class="fas fa-plus"></i> เพิ่มพนักงาน
+        </button>
+      </div>
+
+      <div class="card">
+        <table class="data-table" id="employees-table">
+          <thead>
+            <tr>
+              <th>รหัส</th>
+              <th>ชื่อ-นามสกุล</th>
+              <th>ตำแหน่ง</th>
+              <th>แผนก</th>
+              <th>วันที่เริ่มงาน</th>
+              <th>เบอร์โทร</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="employees-tbody">
+            <tr><td colspan="8" class="empty-msg">กำลังโหลด...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== ATTENDANCE PAGE ===== -->
+    <section id="page-attendance" class="page hidden">
+      <div class="page-actions">
+        <div class="filter-group">
+          <label>เดือน:</label>
+          <input type="month" id="att-month" />
+        </div>
+        <div class="filter-group">
+          <label>พนักงาน:</label>
+          <select id="att-emp-filter">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary" id="btn-load-att"><i class="fas fa-filter"></i> กรอง</button>
+        <button class="btn btn-primary" id="btn-add-attendance"><i class="fas fa-plus"></i> บันทึกเวลา</button>
+      </div>
+
+      <div class="card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>วันที่</th>
+              <th>รหัสพนักงาน</th>
+              <th>ชื่อ</th>
+              <th>เวลาเข้า</th>
+              <th>เวลาออก</th>
+              <th>ชั่วโมงทำงาน</th>
+              <th>สถานะ</th>
+              <th>หมายเหตุ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="attendance-tbody">
+            <tr><td colspan="9" class="empty-msg">กำลังโหลด...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== SALARY PAGE ===== -->
+    <section id="page-salary" class="page hidden">
+      <div class="page-actions">
+        <div class="filter-group">
+          <label>เดือน:</label>
+          <input type="month" id="sal-month" />
+        </div>
+        <button class="btn btn-secondary" id="btn-load-sal"><i class="fas fa-filter"></i> กรอง</button>
+        <button class="btn btn-primary" id="btn-add-salary"><i class="fas fa-plus"></i> บันทึกเงินเดือน</button>
+        <button class="btn btn-success" id="btn-export-salary"><i class="fas fa-file-excel"></i> Export</button>
+      </div>
+
+      <div class="stats-grid mini">
+        <div class="stat-card green mini">
+          <div class="stat-icon"><i class="fas fa-money-bill"></i></div>
+          <div class="stat-info"><h3 id="sal-total">฿0</h3><p>รวมจ่ายเดือนนี้</p></div>
+        </div>
+        <div class="stat-card blue mini">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-info"><h3 id="sal-count">0</h3><p>จำนวนพนักงาน</p></div>
+        </div>
+        <div class="stat-card orange mini">
+          <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="stat-info"><h3 id="sal-avg">฿0</h3><p>เฉลี่ยต่อคน</p></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>เดือน</th>
+              <th>รหัสพนักงาน</th>
+              <th>ชื่อ</th>
+              <th>เงินเดือนฐาน</th>
+              <th>โอที</th>
+              <th>โบนัส</th>
+              <th>หัก</th>
+              <th>รวมสุทธิ</th>
+              <th>สถานะ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="salary-tbody">
+            <tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== PERFORMANCE PAGE ===== -->
+    <section id="page-performance" class="page hidden">
+      <div class="page-actions">
+        <div class="filter-group">
+          <label>ปี:</label>
+          <select id="perf-year"></select>
+        </div>
+        <div class="filter-group">
+          <label>ไตรมาส:</label>
+          <select id="perf-quarter">
+            <option value="">ทั้งหมด</option>
+            <option value="Q1">Q1 (ม.ค.-มี.ค.)</option>
+            <option value="Q2">Q2 (เม.ย.-มิ.ย.)</option>
+            <option value="Q3">Q3 (ก.ค.-ก.ย.)</option>
+            <option value="Q4">Q4 (ต.ค.-ธ.ค.)</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary" id="btn-load-perf"><i class="fas fa-filter"></i> กรอง</button>
+        <button class="btn btn-primary" id="btn-add-performance"><i class="fas fa-plus"></i> บันทึกประเมิน</button>
+      </div>
+
+      <div class="card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>วันที่ประเมิน</th>
+              <th>รหัสพนักงาน</th>
+              <th>ชื่อ</th>
+              <th>ไตรมาส/ปี</th>
+              <th>คุณภาพงาน</th>
+              <th>ความตรงต่อเวลา</th>
+              <th>ทีมเวิร์ค</th>
+              <th>คะแนนรวม</th>
+              <th>ระดับ</th>
+              <th>จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="performance-tbody">
+            <tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== MODALS ===== -->
+
+<!-- Employee Modal -->
+<div id="modal-employee" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-emp-title">เพิ่มพนักงาน</h3>
+      <button class="modal-close" data-modal="modal-employee"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="form-employee" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>รหัสพนักงาน *</label>
+          <input type="text" name="emp_id" required placeholder="เช่น EMP001" />
+        </div>
+        <div class="form-group">
+          <label>ชื่อ *</label>
+          <input type="text" name="first_name" required placeholder="ชื่อ" />
+        </div>
+        <div class="form-group">
+          <label>นามสกุล *</label>
+          <input type="text" name="last_name" required placeholder="นามสกุล" />
+        </div>
+        <div class="form-group">
+          <label>ตำแหน่ง *</label>
+          <input type="text" name="position" required placeholder="เช่น คนงานฟาร์ม" />
+        </div>
+        <div class="form-group">
+          <label>แผนก</label>
+          <select name="department">
+            <option value="ฟาร์ม">ฟาร์ม</option>
+            <option value="โรงเรือน">โรงเรือน</option>
+            <option value="ขนส่ง">ขนส่ง</option>
+            <option value="บัญชี">บัญชี</option>
+            <option value="ทั่วไป">ทั่วไป</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>วันที่เริ่มงาน *</label>
+          <input type="date" name="start_date" required />
+        </div>
+        <div class="form-group">
+          <label>เบอร์โทร</label>
+          <input type="tel" name="phone" placeholder="0xx-xxx-xxxx" />
+        </div>
+        <div class="form-group">
+          <label>เงินเดือนฐาน (บาท)</label>
+          <input type="number" name="base_salary" placeholder="0" min="0" />
+        </div>
+        <div class="form-group">
+          <label>สถานะ</label>
+          <select name="status">
+            <option value="ทำงาน">ทำงาน</option>
+            <option value="ลาออก">ลาออก</option>
+            <option value="พักงาน">พักงาน</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>ที่อยู่</label>
+          <textarea name="address" rows="2" placeholder="ที่อยู่ปัจจุบัน"></textarea>
+        </div>
+        <div class="form-group full-width">
+          <label>หมายเหตุ</label>
+          <textarea name="notes" rows="2"></textarea>
+        </div>
+      </div>
+      <input type="hidden" name="row_index" value="" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-employee">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Attendance Modal -->
+<div id="modal-attendance" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-att-title">บันทึกเวลาทำงาน</h3>
+      <button class="modal-close" data-modal="modal-attendance"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="form-attendance" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>วันที่ *</label>
+          <input type="date" name="date" required />
+        </div>
+        <div class="form-group">
+          <label>พนักงาน *</label>
+          <select name="emp_id" required id="att-emp-select">
+            <option value="">-- เลือกพนักงาน --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>เวลาเข้า</label>
+          <input type="time" name="time_in" />
+        </div>
+        <div class="form-group">
+          <label>เวลาออก</label>
+          <input type="time" name="time_out" />
+        </div>
+        <div class="form-group">
+          <label>สถานะ *</label>
+          <select name="status" required>
+            <option value="มา">มา</option>
+            <option value="ลาป่วย">ลาป่วย</option>
+            <option value="ลากิจ">ลากิจ</option>
+            <option value="ขาด">ขาด</option>
+            <option value="วันหยุด">วันหยุด</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>OT (ชั่วโมง)</label>
+          <input type="number" name="ot_hours" min="0" step="0.5" value="0" />
+        </div>
+        <div class="form-group full-width">
+          <label>หมายเหตุ</label>
+          <textarea name="notes" rows="2"></textarea>
+        </div>
+      </div>
+      <input type="hidden" name="row_index" value="" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-attendance">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Salary Modal -->
+<div id="modal-salary" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-sal-title">บันทึกเงินเดือน</h3>
+      <button class="modal-close" data-modal="modal-salary"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="form-salary" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>เดือน *</label>
+          <input type="month" name="month" required />
+        </div>
+        <div class="form-group">
+          <label>พนักงาน *</label>
+          <select name="emp_id" required id="sal-emp-select">
+            <option value="">-- เลือกพนักงาน --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>เงินเดือนฐาน (บาท)</label>
+          <input type="number" name="base_salary" min="0" value="0" id="sal-base" />
+        </div>
+        <div class="form-group">
+          <label>ค่าโอที (บาท)</label>
+          <input type="number" name="ot_pay" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>โบนัส (บาท)</label>
+          <input type="number" name="bonus" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>ค่าลด/หัก (บาท)</label>
+          <input type="number" name="deduction" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>รวมสุทธิ (บาท)</label>
+          <input type="number" name="net_pay" min="0" value="0" id="sal-net" readonly />
+        </div>
+        <div class="form-group">
+          <label>สถานะ</label>
+          <select name="payment_status">
+            <option value="รอจ่าย">รอจ่าย</option>
+            <option value="จ่ายแล้ว">จ่ายแล้ว</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>หมายเหตุ</label>
+          <textarea name="notes" rows="2"></textarea>
+        </div>
+      </div>
+      <input type="hidden" name="row_index" value="" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-salary">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Performance Modal -->
+<div id="modal-performance" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-perf-title">บันทึกประเมินผลงาน</h3>
+      <button class="modal-close" data-modal="modal-performance"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="form-performance" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>วันที่ประเมิน *</label>
+          <input type="date" name="eval_date" required />
+        </div>
+        <div class="form-group">
+          <label>พนักงาน *</label>
+          <select name="emp_id" required id="perf-emp-select">
+            <option value="">-- เลือกพนักงาน --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ปี *</label>
+          <input type="number" name="year" required min="2020" max="2099" />
+        </div>
+        <div class="form-group">
+          <label>ไตรมาส *</label>
+          <select name="quarter" required>
+            <option value="Q1">Q1</option>
+            <option value="Q2">Q2</option>
+            <option value="Q3">Q3</option>
+            <option value="Q4">Q4</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>คุณภาพงาน (1-5)</label>
+          <input type="number" name="quality" min="1" max="5" step="0.5" value="3" class="perf-score" />
+        </div>
+        <div class="form-group">
+          <label>ความตรงต่อเวลา (1-5)</label>
+          <input type="number" name="punctuality" min="1" max="5" step="0.5" value="3" class="perf-score" />
+        </div>
+        <div class="form-group">
+          <label>ทีมเวิร์ค (1-5)</label>
+          <input type="number" name="teamwork" min="1" max="5" step="0.5" value="3" class="perf-score" />
+        </div>
+        <div class="form-group">
+          <label>ความรับผิดชอบ (1-5)</label>
+          <input type="number" name="responsibility" min="1" max="5" step="0.5" value="3" class="perf-score" />
+        </div>
+        <div class="form-group">
+          <label>คะแนนรวม (อัตโนมัติ)</label>
+          <input type="number" name="total_score" readonly id="perf-total" value="3.00" />
+        </div>
+        <div class="form-group">
+          <label>ระดับ</label>
+          <input type="text" name="grade" readonly id="perf-grade" value="C" />
+        </div>
+        <div class="form-group full-width">
+          <label>ความคิดเห็น/ข้อเสนอแนะ</label>
+          <textarea name="comments" rows="3"></textarea>
+        </div>
+      </div>
+      <input type="hidden" name="row_index" value="" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-performance">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/api.js" defer></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/employees.js"></script>
+<script src="js/attendance.js"></script>
+<script src="js/salary.js"></script>
+<script src="js/performance.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

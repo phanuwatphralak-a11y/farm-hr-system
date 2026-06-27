@@ -346,7 +346,7 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ===== STATQ CARDQ€===== */
+/* ===== STATQ CARDQï¿½===== */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -757,6 +757,61 @@ body {
 .score-c { color: #d97706; font-weight: 700; }
 .score-d { color: #dc2626; font-weight: 700; }
 
+
+/* ===== LEAVE TABS ===== */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: var(--radius);
+  padding: 6px;
+  box-shadow: var(--shadow);
+  width: fit-content;
+}
+
+.leave-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.leave-tab-btn:hover { background: var(--bg); color: var(--text); }
+.leave-tab-btn.active { background: var(--primary); color: white; }
+
+/* ===== APPROVE / REJECT ===== */
+.btn-sm-approve { background: #f0fdf4; color: var(--success); }
+.btn-sm-approve:hover { background: var(--success); color: white; }
+.btn-sm-reject { background: #fef2f2; color: var(--danger); }
+.btn-sm-reject:hover { background: var(--danger); color: white; }
+
+/* ===== QUOTA ===== */
+.quota-year-label {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.quota-year-label i { color: var(--success); }
+.quota-table-wrap { overflow-x: auto; }
+.quota-cell { display: flex; flex-direction: column; gap: 5px; min-width: 90px; font-size: 13px; }
+.quota-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.quota-fill { height: 100%; background: var(--success); border-radius: 99px; transition: width 0.4s ease; }
+.quota-fill.over { background: var(--danger); }
+.text-danger { color: var(--danger); font-weight: 700; }
+.td-reason { max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.days-display {
+  padding: 9px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--primary-light);
+  font-size: 18px; font-weight: 700; color: var(--primary);
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .sidebar {

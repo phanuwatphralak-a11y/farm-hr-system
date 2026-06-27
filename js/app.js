@@ -20,7 +20,9 @@ function initApp() {
     try {
       STATE.currentUser = JSON.parse(savedUser);
       showApp();
-    } catch { showLoginScreen(); }
+    } catch {
+      showLoginScreen();
+    }
   } else {
     showLoginScreen();
   }
@@ -101,9 +103,12 @@ function navigateTo(page) {
   const pageEl = document.getElementById(`page-${page}`);
   if (pageEl) { pageEl.classList.remove("hidden"); pageEl.classList.add("active"); }
   const titles = {
-    dashboard: "ภาพรวม", employees: "ข้อมูลพนักงาน",
-    attendance: "เวลาทำงาน", salary: "เงินเดือน/ค่าจ้าง",
-    performance: "ประเมินผลงาน", leave: "การลาหยุด"
+    dashboard: "ภาพรวม",
+    employees: "ข้อมูลพนักงาน",
+    attendance: "เวลาทำงาน",
+    salary: "เงินเดือน/ค่าจ้าง",
+    performance: "ประเมินผลงาน",
+    leave: "การลาหยุด"
   };
   document.getElementById("page-title").textContent = titles[page] || page;
   loadPageData(page);
@@ -191,7 +196,8 @@ async function loadDashboard() {
     attList.innerHTML = `<p class="empty-msg">ยังไม่มีการบันทึกวันนี้</p>`;
   }
   await PERFORMANCE.load();
-  const sorted = [...STATE.performance].sort((a,b) => (b.eval_date||"").localeCompare(a.eval_date||""));
+  const sorted = [...STATE.performance].sort((a,b) =>
+    (b.eval_date || "").localeCompare(a.eval_date || ""));
   const recent = sorted.slice(0, 5);
   const perfList = document.getElementById("recent-performance-list");
   if (recent.length) {
@@ -281,7 +287,10 @@ function bindEvents() {
   // EMPLOYEES
   document.getElementById("btn-add-employee").addEventListener("click", () => EMPLOYEES.openAdd());
   document.getElementById("emp-search").addEventListener("input", e => EMPLOYEES.render(e.target.value));
-  document.getElementById("form-employee").addEventListener("submit", e => { e.preventDefault(); EMPLOYEES.save(e.target); });
+  document.getElementById("form-employee").addEventListener("submit", e => {
+    e.preventDefault();
+    EMPLOYEES.save(e.target);
+  });
 
   // ATTENDANCE
   document.getElementById("btn-add-attendance").addEventListener("click", () => ATTENDANCE.openAdd());
@@ -294,7 +303,10 @@ function bindEvents() {
       ATTENDANCE.render(list);
     } finally { showLoading(false); }
   });
-  document.getElementById("form-attendance").addEventListener("submit", e => { e.preventDefault(); ATTENDANCE.save(e.target); });
+  document.getElementById("form-attendance").addEventListener("submit", e => {
+    e.preventDefault();
+    ATTENDANCE.save(e.target);
+  });
 
   // SALARY
   document.getElementById("btn-add-salary").addEventListener("click", () => SALARY.openAdd());
@@ -309,7 +321,10 @@ function bindEvents() {
   document.getElementById("btn-export-salary").addEventListener("click", () => {
     SALARY.exportCSV(SALARY.getCurrentList());
   });
-  document.getElementById("form-salary").addEventListener("submit", e => { e.preventDefault(); SALARY.save(e.target); });
+  document.getElementById("form-salary").addEventListener("submit", e => {
+    e.preventDefault();
+    SALARY.save(e.target);
+  });
 
   // PERFORMANCE
   document.getElementById("btn-add-performance").addEventListener("click", () => PERFORMANCE.openAdd());
@@ -322,7 +337,10 @@ function bindEvents() {
       PERFORMANCE.render(list);
     } finally { showLoading(false); }
   });
-  document.getElementById("form-performance").addEventListener("submit", e => { e.preventDefault(); PERFORMANCE.save(e.target); });
+  document.getElementById("form-performance").addEventListener("submit", e => {
+    e.preventDefault();
+    PERFORMANCE.save(e.target);
+  });
 
   // LEAVE
   document.getElementById("btn-add-leave").addEventListener("click", () => LEAVE.openAdd());
@@ -336,7 +354,16 @@ function bindEvents() {
       LEAVE.render(list);
     } finally { showLoading(false); }
   });
-  document.getElementById("form-leave").addEventListener("submit", e => { e.preventDefault(); LEAVE.save(e.target); });
+  document.getElementById("form-leave").addEventListener("submit", e => {
+    e.preventDefault();
+    LEAVE.save(e.target);
+  });
   document.getElementById("leave-start").addEventListener("change", () => LEAVE.updateDaysDisplay());
   document.getElementById("leave-end").addEventListener("change", () => LEAVE.updateDaysDisplay());
+
+  // PROFILE
+  document.getElementById("form-profile").addEventListener("submit", e => {
+    e.preventDefault();
+    PROFILE.save(e.target);
+  });
 }

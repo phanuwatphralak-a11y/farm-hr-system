@@ -617,6 +617,10 @@
       <button class="profile-tab-btn active" data-tab="personal" onclick="PROFILE.switchTab('personal')"><i class="fas fa-id-card"></i> ข้อมูลส่วนตัว</button>
       <button class="profile-tab-btn" data-tab="emergency" onclick="PROFILE.switchTab('emergency')"><i class="fas fa-phone-alt"></i> ผู้ติดต่อฉุกเฉิน</button>
       <button class="profile-tab-btn" data-tab="bank" onclick="PROFILE.switchTab('bank')"><i class="fas fa-university"></i> บัญชีธนาคาร</button>
+      <button class="profile-tab-btn" data-tab="hist-attendance" onclick="PROFILE.switchTab('hist-attendance')"><i class="fas fa-clock"></i> เวลาทำงาน</button>
+      <button class="profile-tab-btn" data-tab="hist-salary" onclick="PROFILE.switchTab('hist-salary')"><i class="fas fa-money-bill-wave"></i> เงินเดือน</button>
+      <button class="profile-tab-btn" data-tab="hist-leave" onclick="PROFILE.switchTab('hist-leave')"><i class="fas fa-calendar-times"></i> การลา</button>
+      <button class="profile-tab-btn" data-tab="hist-perf" onclick="PROFILE.switchTab('hist-perf')"><i class="fas fa-star"></i> ประเมินผล</button>
     </div>
     <form id="form-profile" class="modal-form">
       <div class="profile-tab-pane" data-tab="personal">
@@ -651,6 +655,14 @@
           <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="3"></textarea></div>
         </div>
       </div>
+      <!-- Tab: ประวัติเวลาทำงาน -->
+      <div class="profile-tab-pane hidden" data-tab="hist-attendance"><div class="profile-section-title">ประวัติเวลาทำงาน</div><div id="profile-hist-att"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <!-- Tab: ประวัติเงินเดือน -->
+      <div class="profile-tab-pane hidden" data-tab="hist-salary"><div class="profile-section-title">ประวัติเงินเดือน</div><div id="profile-hist-sal"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <!-- Tab: ประวัติการลา -->
+      <div class="profile-tab-pane hidden" data-tab="hist-leave"><div class="profile-section-title">ประวัติการลา</div><div id="profile-hist-leave"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <!-- Tab: ประวัติการประเมิน -->
+      <div class="profile-tab-pane hidden" data-tab="hist-perf"><div class="profile-section-title">ประวัติการประเมินผล</div><div id="profile-hist-perf"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
       <input type="hidden" name="emp_id"/>
       <input type="hidden" name="row_index"/>
       <div class="modal-footer">

@@ -10,7 +10,8 @@ const CONFIG = {
     ATTENDANCE:  "เวลาทำงาน",
     SALARY:      "เงินเดือน",
     PERFORMANCE: "ประเมินผล",
-    LEAVE:       "การลา"
+    LEAVE:       "การลา",
+    PERSONAL:    "ข้อมูลส่วนตัว"
   },
   ORG_NAME: "HR ฟาร์ม"
 };

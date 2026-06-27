@@ -1,6 +1,6 @@
 /**
- * employees.js â à¸à¸±à¸à¸à¸²à¸£à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸à¸±à¸à¸à¸²à¸
- * à¸à¸­à¸¥à¸±à¸¡à¸à¹ Sheet: emp_id | first_name | last_name | position | department |
+ * employees.js — จัดการข้อมูลพนักงาน
+ * คอลัมน์ Sheet: emp_id | first_name | last_name | position | department |
  *                start_date | phone | base_salary | status | address | notes
  */
 
@@ -34,7 +34,7 @@ const EMPLOYEES = {
       : STATE.employees;
 
     if (!list.length) {
-      tbody.innerHTML = `<tr><td colspan="8" class="empty-msg">à¹à¸¡à¹à¸à¸à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸à¸±à¸à¸à¸²à¸</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8" class="empty-msg">ไม่พบข้อมูลพนักงาน</td></tr>`;
       return;
     }
 
@@ -50,7 +50,7 @@ const EMPLOYEES = {
         <td>
           <div class="action-btns">
             <button class="btn-sm btn-sm-edit" onclick="EMPLOYEES.openEdit(${e._row - 1})">
-              <i class="fas fa-edit"></i> à¹à¸à¹à¹à¸
+              <i class="fas fa-edit"></i> แก้ไข
             </button>
             <button class="btn-sm btn-sm-del" onclick="EMPLOYEES.confirmDelete(${e._row}, '${e.first_name} ${e.last_name}')">
               <i class="fas fa-trash"></i>
@@ -65,7 +65,7 @@ const EMPLOYEES = {
     form.reset();
     form.querySelector("[name=row_index]").value = "";
     form.querySelector("[name=start_date]").value = new Date().toISOString().slice(0,10);
-    document.getElementById("modal-emp-title").textContent = "à¹à¸à¸´à¹à¸¡à¸à¸à¸±à¸à¸à¸²à¸";
+    document.getElementById("modal-emp-title").textContent = "เพิ่มพนักงาน";
     openModal("modal-employee");
   },
 
@@ -79,7 +79,7 @@ const EMPLOYEES = {
       if (el) el.value = e[k] || "";
     });
     form.querySelector("[name=row_index]").value = e._row;
-    document.getElementById("modal-emp-title").textContent = "à¹à¸à¹à¹à¸à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸à¸±à¸à¸à¸²à¸";
+    document.getElementById("modal-emp-title").textContent = "แก้ไขข้อมูลพนักงาน";
     openModal("modal-employee");
   },
 
@@ -93,24 +93,24 @@ const EMPLOYEES = {
     try {
       if (rowIndex) {
         await API.update(CONFIG.SHEETS.EMPLOYEES, parseInt(rowIndex), this.objToRow(obj));
-        showToast("â à¹à¸à¹à¹à¸à¸à¹à¸­à¸¡à¸¹à¸¥à¸ªà¸³à¹à¸£à¹à¸");
+        showToast("✅ แก้ไขข้อมูลสำเร็จ");
       } else {
         await API.append(CONFIG.SHEETS.EMPLOYEES, this.objToRow(obj));
-        showToast("â à¹à¸à¸´à¹à¸¡à¸à¸à¸±à¸à¸à¸²à¸à¸ªà¸³à¹à¸£à¹à¸");
+        showToast("✅ เพิ่มพนักงานสำเร็จ");
       }
       closeModal("modal-employee");
       await this.load();
       this.render();
       populateEmpSelects();
     } catch (err) {
-      showToast("â à¹à¸à¸´à¸à¸à¹à¸­à¸à¸´à¸à¸à¸¥à¸²à¸: " + err.message, "error");
+      showToast("❌ เกิดข้อผิดพลาด: " + err.message, "error");
     } finally {
       showLoading(false);
     }
   },
 
   confirmDelete(rowIndex, name) {
-    if (!confirm(`à¸à¹à¸­à¸à¸à¸²à¸£à¸¥à¸à¸à¸à¸±à¸à¸à¸²à¸ "${name}" à¹à¸à¹à¸«à¸£à¸·à¸­à¹à¸¡à¹?`)) return;
+    if (!confirm(`ต้องการลบพนักงาน "${name}" ใช่หรือไม่?`)) return;
     this.deleteRow(rowIndex);
   },
 
@@ -118,12 +118,12 @@ const EMPLOYEES = {
     showLoading(true);
     try {
       await API.delete(CONFIG.SHEETS.EMPLOYEES, rowIndex);
-      showToast("ðï¸ à¸¥à¸à¸à¸à¸±à¸à¸à¸²à¸à¸ªà¸³à¹à¸£à¹à¸");
+      showToast("🗑️ ลบพนักงานสำเร็จ");
       await this.load();
       this.render();
       populateEmpSelects();
     } catch (err) {
-      showToast("â à¹à¸à¸´à¸à¸à¹à¸­à¸à¸´à¸à¸à¸¥à¸²à¸: " + err.message, "error");
+      showToast("❌ เกิดข้อผิดพลาด: " + err.message, "error");
     } finally {
       showLoading(false);
     }

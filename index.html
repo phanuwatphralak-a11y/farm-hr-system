@@ -45,6 +45,7 @@
       <li><a href="#" class="menu-item" data-page="attendance"><i class="fas fa-clock"></i><span>เวลาทำงาน</span></a></li>
       <li><a href="#" class="menu-item" data-page="salary"><i class="fas fa-money-bill-wave"></i><span>เงินเดือน</span></a></li>
       <li><a href="#" class="menu-item" data-page="performance"><i class="fas fa-star"></i><span>ประเมินผล</span></a></li>
+      <li><a href="#" class="menu-item" data-page="leave"><i class="fas fa-calendar-times"></i><span>การลา</span></a></li>
     </ul>
 
     <div class="sidebar-footer">
@@ -296,6 +297,38 @@
           </tbody>
         </table>
       </div>
+    </section>
+
+
+    <!-- ===== LEAVE PAGE ===== -->
+    <section id="page-leave" class="page hidden">
+      <div class="tab-bar">
+        <button class="leave-tab-btn active" data-tab="requests" onclick="LEAVE.switchTab('requests')"><i class="fas fa-list-alt"></i> คำขอลา</button>
+        <button class="leave-tab-btn" data-tab="quota" onclick="LEAVE.switchTab('quota')"><i class="fas fa-calendar-check"></i> โควต้าวันลา</button>
+      </div>
+      <div id="leave-tab-requests">
+        <div class="page-actions">
+          <div class="filter-group"><label>ปี:</label><select id="leave-year-filter"></select></div>
+          <div class="filter-group"><label>พนักงาน:</label><select id="leave-emp-filter-req"><option value="">ทั้งหมด</option></select></div>
+          <div class="filter-group"><label>สถานะ:</label>
+            <select id="leave-status-filter">
+              <option value="">ทั้งหมด</option>
+              <option value="รอการอนุมัติ">รอการอนุมัติ</option>
+              <option value="อนุมัติ">อนุมัติ</option>
+              <option value="ปฏิเสธ">ปฏิเสธ</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary" id="btn-load-leave"><i class="fas fa-filter"></i> กรอง</button>
+          <button class="btn btn-primary" id="btn-add-leave"><i class="fas fa-plus"></i> ยื่นคำขอลา</button>
+        </div>
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>วันที่ยื่น</th><th>รหัส</th><th>ชื่อพนักงาน</th><th>ประเภทการลา</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>จำนวนวัน</th><th>เหตุผล</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+            <tbody id="leave-tbody"><tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="leave-tab-quota" class="hidden"><div id="leave-quota-list"><p class="empty-msg">กำลังโหลด...</p></div></div>
     </section>
 
   </main>
@@ -562,6 +595,41 @@
   </div>
 </div>
 
+<!-- Leave Modal -->
+<div id="modal-leave" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-leave-title">ยื่นคำขอลา</h3>
+      <button class="modal-close" data-modal="modal-leave"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="form-leave" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group"><label>วันที่ยื่นคำขอ</label><input type="date" name="request_date" required /></div>
+        <div class="form-group"><label>พนักงาน *</label><select name="emp_id" required id="leave-emp-select"><option value="">-- เลือกพนักงาน --</option></select></div>
+        <div class="form-group full-width"><label>ประเภทการลา *</label>
+          <select name="leave_type" required>
+            <option value="ลาป่วย">ลาป่วย (สูงสุด 30 วัน/ปี)</option>
+            <option value="ลากิจ">ลากิจ (สูงสุด 3 วัน/ปี)</option>
+            <option value="ลาพักร้อน">ลาพักร้อน (สูงสุด 6 วัน/ปี)</option>
+            <option value="ลาคลอด">ลาคลอด (สูงสุด 90 วัน)</option>
+            <option value="ลาอื่นๆ">ลาอื่นๆ</option>
+          </select>
+        </div>
+        <div class="form-group"><label>วันที่เริ่มลา *</label><input type="date" name="start_date" required id="leave-start" /></div>
+        <div class="form-group"><label>วันที่สิ้นสุด *</label><input type="date" name="end_date" required id="leave-end" /></div>
+        <div class="form-group"><label>จำนวนวัน</label><div class="days-display"><span id="leave-days-calc">1</span> วัน</div><input type="hidden" name="days" value="1" /></div>
+        <div class="form-group full-width"><label>เหตุผล *</label><textarea name="reason" rows="2" required placeholder="ระบุเหตุผลในการลา"></textarea></div>
+        <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="2"></textarea></div>
+      </div>
+      <input type="hidden" name="row_index" value="" />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-leave">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> ยื่นคำขอ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- Toast -->
 <div id="toast" class="toast hidden"></div>
 
@@ -574,6 +642,7 @@
 <script src="js/attendance.js"></script>
 <script src="js/salary.js"></script>
 <script src="js/performance.js"></script>
+<script src="js/leave.js"></script>
 <script src="js/app.js"></script>
 
 </body>

@@ -1,7 +1,5 @@
 /**
  * employees.js — จัดการข้อมูลพนักงาน
- * คอลัมน์ Sheet: emp_id | first_name | last_name | position | department |
- *                start_date | phone | base_salary | status | address | notes
  */
 
 const EMPLOYEES = {
@@ -49,6 +47,9 @@ const EMPLOYEES = {
         <td>${statusBadge(e.status)}</td>
         <td>
           <div class="action-btns">
+            <button class="btn-sm btn-sm-profile" onclick="PROFILE.openProfile('${e.emp_id}')" title="ข้อมูลส่วนตัว">
+              <i class="fas fa-id-card"></i>
+            </button>
             <button class="btn-sm btn-sm-edit" onclick="EMPLOYEES.openEdit(${e._row - 1})">
               <i class="fas fa-edit"></i> แก้ไข
             </button>

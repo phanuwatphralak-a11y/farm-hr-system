@@ -1,10 +1,5 @@
 /**
  * profile.js — จัดการข้อมูลส่วนตัวรายบุคคล
- * Sheet "ข้อมูลส่วนตัว":
- *   emp_id | national_id | birth_date | gender | nationality | religion |
- *   blood_type | marital_status | emergency_name | emergency_relation |
- *   emergency_phone | bank_name | bank_account | education_level |
- *   education_institution | skills | notes
  */
 
 const PROFILE = {
@@ -34,7 +29,7 @@ const PROFILE = {
   },
 
   getByEmpId(empId) {
-    return this._cache.find(p => p.emp_id === empId) || null;
+    return this._cache.find(p => String(p.emp_id) === String(empId)) || null;
   },
 
   calcAge(birthDate) {
@@ -47,8 +42,11 @@ const PROFILE = {
   },
 
   async openProfile(empId) {
-    const emp = STATE.employees.find(e => e.emp_id === empId);
-    if (!emp) return;
+    const emp = STATE.employees.find(e => String(e.emp_id) === String(empId));
+    if (!emp) {
+      showToast("⚠️ ไม่พบข้อมูลพนักงาน (emp_id: " + empId + ")", "error");
+      return;
+    }
 
     showLoading(true);
     try {
@@ -76,7 +74,7 @@ const PROFILE = {
 
     const form = document.getElementById("form-profile");
     form.reset();
-    form.querySelector("[name=emp_id]").value = empId;
+    form.querySelector("[name=emp_id]").value = String(empId);
     form.querySelector("[name=row_index]").value = personal?._row || "";
 
     if (personal) {

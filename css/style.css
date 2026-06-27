@@ -893,6 +893,36 @@ body {
   border-radius: var(--radius-sm); background: var(--primary-light);
   font-size: 18px; font-weight: 700; color: var(--primary);
 }
+/* ===== PROFILE HISTORY TABS ===== */
+.profile-tabs { flex-wrap: wrap; }
+
+.hist-summary {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hist-summary span { color: var(--primary); }
+
+.hist-table-wrap {
+  overflow-x: auto;
+  max-height: 340px;
+  overflow-y: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.hist-table-wrap .data-table { margin: 0; }
+
+.text-right { text-align: right; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .sidebar {

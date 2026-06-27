@@ -134,8 +134,8 @@ async function loadPageData(page) {
         break;
       }
       case "salary": {
-        const month = document.getElementById("sal-month").value;
-        const list = await SALARY.load(month);
+        // โหลดทั้งหมดก่อน ไม่ filter ตามเดือน
+        const list = await SALARY.load("");
         SALARY.render(list);
         break;
       }

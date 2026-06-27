@@ -16,7 +16,12 @@ const SHEET_HEADERS = {
                   "total_score","grade","comments"],
   "การลา":      ["leave_id","request_date","emp_id","emp_name","leave_type",
                   "start_date","end_date","days","reason","status",
-                  "approved_by","approved_date","notes"]
+                  "approved_by","approved_date","notes"],
+  "ข้อมูลส่วนตัว": ["emp_id","national_id","birth_date","gender","nationality",
+                     "religion","blood_type","marital_status","emergency_name",
+                     "emergency_relation","emergency_phone","bank_name",
+                     "bank_account","education_level","education_institution",
+                     "skills","notes"]
 };
 
 function doGet(e) {
@@ -38,9 +43,18 @@ function doPost(e) {
     const body   = JSON.parse(e.postData.contents);
     const action = body.action;
     const sheet  = body.sheet;
-    if (action === "append") { appendRow(sheet, body.values); return jsonResponse({ success: true }); }
-    if (action === "update") { updateRow(sheet, body.rowIndex, body.values); return jsonResponse({ success: true }); }
-    if (action === "delete") { deleteRow(sheet, body.rowIndex); return jsonResponse({ success: true }); }
+    if (action === "append") {
+      appendRow(sheet, body.values);
+      return jsonResponse({ success: true });
+    }
+    if (action === "update") {
+      updateRow(sheet, body.rowIndex, body.values);
+      return jsonResponse({ success: true });
+    }
+    if (action === "delete") {
+      deleteRow(sheet, body.rowIndex);
+      return jsonResponse({ success: true });
+    }
     return jsonResponse({ error: "Unknown action: " + action });
   } catch (err) {
     return jsonResponse({ error: err.message });
@@ -58,7 +72,9 @@ function getSheet(name) {
     if (headers) {
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       sheet.getRange(1, 1, 1, headers.length)
-        .setBackground("#1e293b").setFontColor("#ffffff").setFontWeight("bold");
+        .setBackground("#1e293b")
+        .setFontColor("#ffffff")
+        .setFontWeight("bold");
       sheet.setFrozenRows(1);
     }
   }
@@ -72,22 +88,30 @@ function getAllRows(sheetName) {
   return data.slice(1);
 }
 
-function appendRow(sheetName, values) { getSheet(sheetName).appendRow(values); }
+function appendRow(sheetName, values) {
+  const sheet = getSheet(sheetName);
+  sheet.appendRow(values);
+}
 
 function updateRow(sheetName, rowIndex, values) {
-  const sheet = getSheet(sheetName);
-  sheet.getRange(rowIndex + 1, 1, 1, values.length).setValues([values]);
+  const sheet  = getSheet(sheetName);
+  const sheetRow = rowIndex + 1;
+  sheet.getRange(sheetRow, 1, 1, values.length).setValues([values]);
 }
 
 function deleteRow(sheetName, rowIndex) {
-  getSheet(sheetName).deleteRow(rowIndex + 1);
+  const sheet  = getSheet(sheetName);
+  const sheetRow = rowIndex + 1;
+  sheet.deleteRow(sheetRow);
 }
 
 function jsonResponse(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function setupSheets() {
   Object.keys(SHEET_HEADERS).forEach(name => getSheet(name));
-  SpreadsheetApp.getUi().alert("✅ สร้าง Sheets สำเร็จ! (รวม sheet การลา)");
+  SpreadsheetApp.getUi().alert("✅ สร้าง Sheets สำเร็จ!");
 }

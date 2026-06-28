@@ -243,13 +243,14 @@
               <th>โอที</th>
               <th>โบนัส</th>
               <th>หัก</th>
+              <th>ปกส.</th>
               <th>รวมสุทธิ</th>
               <th>สถานะ</th>
               <th>จัดการ</th>
             </tr>
           </thead>
           <tbody id="salary-tbody">
-            <tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr>
+            <tr><td colspan="11" class="empty-msg">กำลังโหลด...</td></tr>
           </tbody>
         </table>
       </div>
@@ -496,8 +497,21 @@
           <input type="number" name="bonus" min="0" value="0" />
         </div>
         <div class="form-group">
-          <label>ค่าลด/หัก (บาท)</label>
+          <label>ค่าลด/หักอื่นๆ (บาท)</label>
           <input type="number" name="deduction" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>ประกันสังคม (5%, อัตโนมัติ)</label>
+          <div style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--primary);font-weight:600">
+            <span id="sal-ss-display">฿0</span>
+            <small style="color:var(--text-muted);font-weight:400;margin-left:6px">เพดาน ฿750/เดือน</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>ภาษีหัก ณ ที่จ่าย (ประมาณการ)</label>
+          <div style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--warning,#d97706);font-weight:600">
+            <span id="sal-tax-display">฿0</span>
+          </div>
         </div>
         <div class="form-group">
           <label>รวมสุทธิ (บาท)</label>

@@ -46,8 +46,8 @@
       <li><a href="#" class="menu-item" data-page="salary"><i class="fas fa-money-bill-wave"></i><span>เงินเดือน</span></a></li>
       <li><a href="#" class="menu-item" data-page="performance"><i class="fas fa-star"></i><span>ประเมินผล</span></a></li>
       <li><a href="#" class="menu-item" data-page="leave"><i class="fas fa-calendar-times"></i><span>การลา</span></a></li>
-        <li><a href="#" class="menu-item" data-page="holidays"><i class="fas fa-calendar-star"></i><span>'1+"811$)L</span></a></li>
-        </ul>
+      <li><a href="#" class="menu-item" data-page="holidays"><i class="fas fa-calendar-star"></i><span>วันหยุดนักขัตฤกษ์</span></a></li>
+    </ul>
 
     <div class="sidebar-footer">
       <div class="user-info" id="user-info">
@@ -301,18 +301,34 @@
       </div>
     </section>
 
-
     <!-- ===== LEAVE PAGE ===== -->
     <section id="page-leave" class="page hidden">
+
+      <!-- Tabs -->
       <div class="tab-bar">
-        <button class="leave-tab-btn active" data-tab="requests" onclick="LEAVE.switchTab('requests')"><i class="fas fa-list-alt"></i> คำขอลา</button>
-        <button class="leave-tab-btn" data-tab="quota" onclick="LEAVE.switchTab('quota')"><i class="fas fa-calendar-check"></i> โควต้าวันลา</button>
+        <button class="leave-tab-btn active" data-tab="requests" onclick="LEAVE.switchTab('requests')">
+          <i class="fas fa-list-alt"></i> คำขอลา
+        </button>
+        <button class="leave-tab-btn" data-tab="quota" onclick="LEAVE.switchTab('quota')">
+          <i class="fas fa-calendar-check"></i> โควต้าวันลา
+        </button>
       </div>
+
+      <!-- Tab: คำขอลา -->
       <div id="leave-tab-requests">
         <div class="page-actions">
-          <div class="filter-group"><label>ปี:</label><select id="leave-year-filter"></select></div>
-          <div class="filter-group"><label>พนักงาน:</label><select id="leave-emp-filter-req"><option value="">ทั้งหมด</option></select></div>
-          <div class="filter-group"><label>สถานะ:</label>
+          <div class="filter-group">
+            <label>ปี:</label>
+            <select id="leave-year-filter"></select>
+          </div>
+          <div class="filter-group">
+            <label>พนักงาน:</label>
+            <select id="leave-emp-filter-req">
+              <option value="">ทั้งหมด</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>สถานะ:</label>
             <select id="leave-status-filter">
               <option value="">ทั้งหมด</option>
               <option value="รอการอนุมัติ">รอการอนุมัติ</option>
@@ -323,47 +339,99 @@
           <button class="btn btn-secondary" id="btn-load-leave"><i class="fas fa-filter"></i> กรอง</button>
           <button class="btn btn-primary" id="btn-add-leave"><i class="fas fa-plus"></i> ยื่นคำขอลา</button>
         </div>
+
         <div class="card">
-          <table class="data-table">
-            <thead><tr><th>วันที่ยื่น</th><th>รหัส</th><th>ชื่อพนักงาน</th><th>ประเภทการลา</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>จำนวนวัน</th><th>เหตุผล</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
-            <tbody id="leave-tbody"><tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr></tbody>
+          <table class="data-table" id="leave-table">
+            <thead>
+              <tr>
+                <th>วันที่ยื่น</th>
+                <th>รหัส</th>
+                <th>ชื่อพนักงาน</th>
+                <th>ประเภทการลา</th>
+                <th>วันเริ่ม</th>
+                <th>วันสิ้นสุด</th>
+                <th>จำนวนวัน</th>
+                <th>เหตุผล</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="leave-tbody">
+              <tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr>
+            </tbody>
           </table>
         </div>
       </div>
-      <div id="leave-tab-quota" class="hidden"><div id="leave-quota-list"><p class="empty-msg">กำลังโหลด...</p></div></div>
-    </section>
 
-  
-  <section id="page-holidays" class="page hidden">
-    <div class="page-header"><h2 class="page-title-sub">44'1+"811$)L</h2></div>
-    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
-      <div class="stat-card"><div class="stat-icon" style="background:#eff6ff"><i class="fas fa-calendar-alt" style="color:#2563eb"></i></div><div class="stat-info"><div class="stat-value" id="hol-count">-</div><div class="stat-label">'1+"81I+!</div></div></div>
-      <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4"><i class="fas fa-calendar-check" style="color:#16a34a"></i></div><div class="stat-info"><div class="stat-value" id="hol-next-name" style="font-size:14px">-</div><div class="stat-label">'1+"81D</div></div></div>
-      <div class="stat-card"><div class="stat-icon" style="background:#fefce8"><i class="fas fa-clock" style="color:#ca8a04"></i></div><div class="stat-info"><div class="stat-value" id="hol-next-date" style="font-size:13px">-</div><div class="stat-label">'15H</div></div></div>
-    </div>
-    <div class="card">
-      <div class="toolbar" style="margin-bottom:0">
-        <div class="toolbar-left">
-          <select id="hol-year-select" class="form-select" style="width:auto" onchange="HOLIDAYS.render(parseInt(this.value))">
-            <option value="2024">2024 (.(. 2567)</option>
-            <option value="2025">2025 (.(. 2568)</option>
-            <option value="2026" selected>2026 (.(. 2569)</option>
-          </select>
-        </div>
-        <div class="toolbar-right">
-          <button class="btn btn-secondary" id="btn-add-holiday" onclick="HOLIDAYS._openAddModal()"><i class="fas fa-plus"></i> @4H!'1+"84@()</button>
+      <!-- Tab: โควต้าวันลา -->
+      <div id="leave-tab-quota" class="hidden">
+        <div id="leave-quota-list">
+          <p class="empty-msg">กำลังโหลด...</p>
         </div>
       </div>
-    </div>
-    <div class="card" style="margin-top:16px">
-      <table class="data-table">
-        <thead><tr><th>'15H</th><th>'1C*12+L</th><th>
-7H-'1+"8</th><th></th></tr></thead>
-        <tbody id="hol-tbody"><tr><td colspan="4" class="empty-msg">3%1B+%...</td></tr></tbody>
-      </table>
-    </div>
-  </section>
-</main>
+
+    </section>
+
+    <!-- ===== HOLIDAYS PAGE ===== -->
+    <section id="page-holidays" class="page hidden">
+
+      <!-- Stats bar -->
+      <div class="stats-grid" style="margin-bottom:16px">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#eff6ff"><i class="fas fa-calendar-star" style="color:#2563eb"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="hol-count">-</div>
+            <div class="stat-label">วันหยุดทั้งหมด (ปีที่เลือก)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#f0fdf4"><i class="fas fa-clock" style="color:#16a34a"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" style="font-size:14px" id="hol-next-name">-</div>
+            <div class="stat-label" id="hol-next-date">วันหยุดถัดไป</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="card" style="padding:12px 16px;margin-bottom:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <label style="font-size:13px;font-weight:600;color:var(--text-muted)">ปี:</label>
+        <select id="hol-year-select" style="border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:14px;font-family:inherit">
+          <option value="2024">2567 (2024)</option>
+          <option value="2025">2568 (2025)</option>
+          <option value="2026" selected>2569 (2026)</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="btn-load-holidays" onclick="loadPageData('holidays')">
+          <i class="fas fa-sync-alt"></i> โหลด
+        </button>
+        <div style="flex:1"></div>
+        <button class="btn btn-primary btn-sm" id="btn-add-holiday" onclick="HOLIDAYS._openAddModal()">
+          <i class="fas fa-plus"></i> เพิ่มวันหยุดพิเศษ
+        </button>
+      </div>
+
+      <!-- Holiday table -->
+      <div class="card">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>วันที่</th>
+                <th>วันในสัปดาห์</th>
+                <th>ชื่อวันหยุด</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="hol-tbody">
+              <tr><td colspan="4" class="empty-msg">กำลังโหลด...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
 </div>
 
 <!-- ===== MODALS ===== -->
@@ -658,58 +726,188 @@
       </div>
       <button class="modal-close" data-modal="modal-profile"><i class="fas fa-times"></i></button>
     </div>
+
+    <!-- Tabs -->
     <div class="profile-tabs">
-      <button class="profile-tab-btn active" data-tab="personal" onclick="PROFILE.switchTab('personal')"><i class="fas fa-id-card"></i> ข้อมูลส่วนตัว</button>
-      <button class="profile-tab-btn" data-tab="emergency" onclick="PROFILE.switchTab('emergency')"><i class="fas fa-phone-alt"></i> ผู้ติดต่อฉุกเฉิน</button>
-      <button class="profile-tab-btn" data-tab="bank" onclick="PROFILE.switchTab('bank')"><i class="fas fa-university"></i> บัญชีธนาคาร</button>
-      <button class="profile-tab-btn" data-tab="hist-attendance" onclick="PROFILE.switchTab('hist-attendance')"><i class="fas fa-clock"></i> เวลาทำงาน</button>
-      <button class="profile-tab-btn" data-tab="hist-salary" onclick="PROFILE.switchTab('hist-salary')"><i class="fas fa-money-bill-wave"></i> เงินเดือน</button>
-      <button class="profile-tab-btn" data-tab="hist-leave" onclick="PROFILE.switchTab('hist-leave')"><i class="fas fa-calendar-times"></i> การลา</button>
-      <button class="profile-tab-btn" data-tab="hist-perf" onclick="PROFILE.switchTab('hist-perf')"><i class="fas fa-star"></i> ประเมินผล</button>
+      <button class="profile-tab-btn active" data-tab="personal" onclick="PROFILE.switchTab('personal')">
+        <i class="fas fa-id-card"></i> ข้อมูลส่วนตัว
+      </button>
+      <button class="profile-tab-btn" data-tab="emergency" onclick="PROFILE.switchTab('emergency')">
+        <i class="fas fa-phone-alt"></i> ผู้ติดต่อฉุกเฉิน
+      </button>
+      <button class="profile-tab-btn" data-tab="bank" onclick="PROFILE.switchTab('bank')">
+        <i class="fas fa-university"></i> บัญชีธนาคาร
+      </button>
+      <button class="profile-tab-btn" data-tab="hist-attendance" onclick="PROFILE.switchTab('hist-attendance')">
+        <i class="fas fa-clock"></i> เวลาทำงาน
+      </button>
+      <button class="profile-tab-btn" data-tab="hist-salary" onclick="PROFILE.switchTab('hist-salary')">
+        <i class="fas fa-money-bill-wave"></i> เงินเดือน
+      </button>
+      <button class="profile-tab-btn" data-tab="hist-leave" onclick="PROFILE.switchTab('hist-leave')">
+        <i class="fas fa-calendar-times"></i> การลา
+      </button>
+      <button class="profile-tab-btn" data-tab="hist-perf" onclick="PROFILE.switchTab('hist-perf')">
+        <i class="fas fa-star"></i> ประเมินผล
+      </button>
     </div>
+
     <form id="form-profile" class="modal-form">
+
+      <!-- Tab: ข้อมูลส่วนตัว -->
       <div class="profile-tab-pane" data-tab="personal">
         <div class="profile-section-title">ข้อมูลส่วนตัว</div>
         <div class="form-grid">
-          <div class="form-group"><label>เลขบัตรประชาชน</label><input type="text" name="national_id" placeholder="1-xxxx-xxxxx-xx-x" maxlength="17"/></div>
-          <div class="form-group"><label>วันเกิด</label><input type="date" name="birth_date" oninput="PROFILE._updateAge()"/></div>
-          <div class="form-group"><label>อายุ</label><div class="age-display" id="profile-age-display">-</div></div>
-          <div class="form-group"><label>เพศ</label><select name="gender"><option value="">-- เลือก --</option><option value="ชาย">ชาย</option><option value="หญิง">หญิง</option><option value="อื่นๆ">อื่นๆ</option></select></div>
-          <div class="form-group"><label>กรุ๊ปเลือด</label><select name="blood_type"><option value="">-- เลือก --</option><option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option></select></div>
-          <div class="form-group"><label>สถานภาพสมรส</label><select name="marital_status"><option value="">-- เลือก --</option><option value="โสด">โสด</option><option value="สมรส">สมรส</option><option value="หย่าร้าง">หย่าร้าง</option><option value="หม้าย">หม้าย</option></select></div>
-          <div class="form-group"><label>สัญชาติ</label><input type="text" name="nationality" placeholder="ไทย"/></div>
-          <div class="form-group"><label>ศาสนา</label><input type="text" name="religion" placeholder="พุทธ"/></div>
-          <div class="form-group"><label>ระดับการศึกษา</label><select name="education_level"><option value="">-- เลือก --</option><option value="ประถมศึกษา">ประถมศึกษา</option><option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option><option value="มัธยมศึกษาตอนปลาย/ปวช.">มัธยมศึกษาตอนปลาย/ปวช.</option><option value="อนุปริญญา/ปวส.">อนุปริญญา/ปวส.</option><option value="ปริญญาตรี">ปริญญาตรี</option><option value="ปริญญาโท">ปริญญาโท</option><option value="ปริญญาเอก">ปริญญาเอก</option></select></div>
-          <div class="form-group"><label>สถาบันการศึกษา</label><input type="text" name="education_institution" placeholder="ชื่อโรงเรียน/มหาวิทยาลัย"/></div>
-          <div class="form-group full-width"><label>ความสามารถพิเศษ / ทักษะ</label><textarea name="skills" rows="2" placeholder="เช่น ขับรถได้, ใช้เครื่องจักรการเกษตร, ภาษาพม่า"></textarea></div>
+          <div class="form-group">
+            <label>เลขบัตรประชาชน</label>
+            <input type="text" name="national_id" placeholder="1-xxxx-xxxxx-xx-x" maxlength="17" />
+          </div>
+          <div class="form-group">
+            <label>วันเกิด</label>
+            <input type="date" name="birth_date" id="profile-birth-date"
+              oninput="PROFILE._updateAge()" />
+          </div>
+          <div class="form-group">
+            <label>อายุ</label>
+            <div class="age-display" id="profile-age-display">-</div>
+          </div>
+          <div class="form-group">
+            <label>เพศ</label>
+            <select name="gender">
+              <option value="">-- เลือก --</option>
+              <option value="ชาย">ชาย</option>
+              <option value="หญิง">หญิง</option>
+              <option value="อื่นๆ">อื่นๆ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>กรุ๊ปเลือด</label>
+            <select name="blood_type">
+              <option value="">-- เลือก --</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="AB">AB</option>
+              <option value="O">O</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>สถานภาพสมรส</label>
+            <select name="marital_status">
+              <option value="">-- เลือก --</option>
+              <option value="โสด">โสด</option>
+              <option value="สมรส">สมรส</option>
+              <option value="หย่าร้าง">หย่าร้าง</option>
+              <option value="หม้าย">หม้าย</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>สัญชาติ</label>
+            <input type="text" name="nationality" placeholder="ไทย" />
+          </div>
+          <div class="form-group">
+            <label>ศาสนา</label>
+            <input type="text" name="religion" placeholder="พุทธ" />
+          </div>
+          <div class="form-group">
+            <label>ระดับการศึกษา</label>
+            <select name="education_level">
+              <option value="">-- เลือก --</option>
+              <option value="ประถมศึกษา">ประถมศึกษา</option>
+              <option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option>
+              <option value="มัธยมศึกษาตอนปลาย/ปวช.">มัธยมศึกษาตอนปลาย/ปวช.</option>
+              <option value="อนุปริญญา/ปวส.">อนุปริญญา/ปวส.</option>
+              <option value="ปริญญาตรี">ปริญญาตรี</option>
+              <option value="ปริญญาโท">ปริญญาโท</option>
+              <option value="ปริญญาเอก">ปริญญาเอก</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>สถาบันการศึกษา</label>
+            <input type="text" name="education_institution" placeholder="ชื่อโรงเรียน/มหาวิทยาลัย" />
+          </div>
+          <div class="form-group full-width">
+            <label>ความสามารถพิเศษ / ทักษะ</label>
+            <textarea name="skills" rows="2" placeholder="เช่น ขับรถได้, ใช้เครื่องจักรการเกษตร, ภาษาพม่า"></textarea>
+          </div>
         </div>
       </div>
+
+      <!-- Tab: ผู้ติดต่อฉุกเฉิน -->
       <div class="profile-tab-pane hidden" data-tab="emergency">
         <div class="profile-section-title">ผู้ติดต่อในกรณีฉุกเฉิน</div>
         <div class="form-grid">
-          <div class="form-group"><label>ชื่อผู้ติดต่อ</label><input type="text" name="emergency_name" placeholder="ชื่อ-นามสกุล"/></div>
-          <div class="form-group"><label>ความสัมพันธ์</label><input type="text" name="emergency_relation" placeholder="เช่น บิดา, มารดา, คู่สมรส"/></div>
-          <div class="form-group full-width"><label>เบอร์โทรศัพท์</label><input type="tel" name="emergency_phone" placeholder="0xx-xxx-xxxx"/></div>
+          <div class="form-group">
+            <label>ชื่อผู้ติดต่อ</label>
+            <input type="text" name="emergency_name" placeholder="ชื่อ-นามสกุล" />
+          </div>
+          <div class="form-group">
+            <label>ความสัมพันธ์</label>
+            <input type="text" name="emergency_relation" placeholder="เช่น บิดา, มารดา, คู่สมรส" />
+          </div>
+          <div class="form-group full-width">
+            <label>เบอร์โทรศัพท์</label>
+            <input type="tel" name="emergency_phone" placeholder="0xx-xxx-xxxx" />
+          </div>
         </div>
       </div>
+
+      <!-- Tab: บัญชีธนาคาร -->
       <div class="profile-tab-pane hidden" data-tab="bank">
         <div class="profile-section-title">ข้อมูลบัญชีธนาคาร (สำหรับโอนเงินเดือน)</div>
         <div class="form-grid">
-          <div class="form-group"><label>ธนาคาร</label><select name="bank_name"><option value="">-- เลือกธนาคาร --</option><option value="กสิกรไทย">ธ.กสิกรไทย (KBANK)</option><option value="กรุงไทย">ธ.กรุงไทย (KTB)</option><option value="กรุงเทพ">ธ.กรุงเทพ (BBL)</option><option value="ไทยพาณิชย์">ธ.ไทยพาณิชย์ (SCB)</option><option value="ออมสิน">ธ.ออมสิน (GSB)</option><option value="กรุงศรี">ธ.กรุงศรี (BAY)</option><option value="ทหารไทยธนชาต">ธ.ทหารไทยธนชาต (TTB)</option><option value="UOB">ธ.ยูโอบี (UOB)</option><option value="อื่นๆ">อื่นๆ</option></select></div>
-          <div class="form-group"><label>เลขบัญชี</label><input type="text" name="bank_account" placeholder="xxx-x-xxxxx-x"/></div>
-          <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="3"></textarea></div>
+          <div class="form-group">
+            <label>ธนาคาร</label>
+            <select name="bank_name">
+              <option value="">-- เลือกธนาคาร --</option>
+              <option value="กสิกรไทย">ธ.กสิกรไทย (KBANK)</option>
+              <option value="กรุงไทย">ธ.กรุงไทย (KTB)</option>
+              <option value="กรุงเทพ">ธ.กรุงเทพ (BBL)</option>
+              <option value="ไทยพาณิชย์">ธ.ไทยพาณิชย์ (SCB)</option>
+              <option value="ออมสิน">ธ.ออมสิน (GSB)</option>
+              <option value="กรุงศรี">ธ.กรุงศรี (BAY)</option>
+              <option value="ทหารไทยธนชาต">ธ.ทหารไทยธนชาต (TTB)</option>
+              <option value="UOB">ธ.ยูโอบี (UOB)</option>
+              <option value="อื่นๆ">อื่นๆ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>เลขบัญชี</label>
+            <input type="text" name="bank_account" placeholder="xxx-x-xxxxx-x" />
+          </div>
+          <div class="form-group full-width">
+            <label>หมายเหตุ</label>
+            <textarea name="notes" rows="3" placeholder="หมายเหตุเพิ่มเติม"></textarea>
+          </div>
         </div>
       </div>
+
       <!-- Tab: ประวัติเวลาทำงาน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-attendance"><div class="profile-section-title">ประวัติเวลาทำงาน</div><div id="profile-hist-att"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <div class="profile-tab-pane hidden" data-tab="hist-attendance">
+        <div class="profile-section-title">ประวัติเวลาทำงาน</div>
+        <div id="profile-hist-att"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div>
+      </div>
+
       <!-- Tab: ประวัติเงินเดือน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-salary"><div class="profile-section-title">ประวัติเงินเดือน</div><div id="profile-hist-sal"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <div class="profile-tab-pane hidden" data-tab="hist-salary">
+        <div class="profile-section-title">ประวัติเงินเดือน</div>
+        <div id="profile-hist-sal"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div>
+      </div>
+
       <!-- Tab: ประวัติการลา -->
-      <div class="profile-tab-pane hidden" data-tab="hist-leave"><div class="profile-section-title">ประวัติการลา</div><div id="profile-hist-leave"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <div class="profile-tab-pane hidden" data-tab="hist-leave">
+        <div class="profile-section-title">ประวัติการลา</div>
+        <div id="profile-hist-leave"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div>
+      </div>
+
       <!-- Tab: ประวัติการประเมิน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-perf"><div class="profile-section-title">ประวัติการประเมินผล</div><div id="profile-hist-perf"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
-      <input type="hidden" name="emp_id"/>
-      <input type="hidden" name="row_index"/>
+      <div class="profile-tab-pane hidden" data-tab="hist-perf">
+        <div class="profile-section-title">ประวัติการประเมินผล</div>
+        <div id="profile-hist-perf"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div>
+      </div>
+
+      <input type="hidden" name="emp_id" />
+      <input type="hidden" name="row_index" />
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary modal-close" data-modal="modal-profile">ยกเลิก</button>
         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึกข้อมูลส่วนตัว</button>
@@ -727,9 +925,18 @@
     </div>
     <form id="form-leave" class="modal-form">
       <div class="form-grid">
-        <div class="form-group"><label>วันที่ยื่นคำขอ</label><input type="date" name="request_date" required /></div>
-        <div class="form-group"><label>พนักงาน *</label><select name="emp_id" required id="leave-emp-select"><option value="">-- เลือกพนักงาน --</option></select></div>
-        <div class="form-group full-width"><label>ประเภทการลา *</label>
+        <div class="form-group">
+          <label>วันที่ยื่นคำขอ</label>
+          <input type="date" name="request_date" required />
+        </div>
+        <div class="form-group">
+          <label>พนักงาน *</label>
+          <select name="emp_id" required id="leave-emp-select">
+            <option value="">-- เลือกพนักงาน --</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label>ประเภทการลา *</label>
           <select name="leave_type" required>
             <option value="ลาป่วย">ลาป่วย (สูงสุด 30 วัน/ปี)</option>
             <option value="ลากิจ">ลากิจ (สูงสุด 3 วัน/ปี)</option>
@@ -738,11 +945,27 @@
             <option value="ลาอื่นๆ">ลาอื่นๆ</option>
           </select>
         </div>
-        <div class="form-group"><label>วันที่เริ่มลา *</label><input type="date" name="start_date" required id="leave-start" /></div>
-        <div class="form-group"><label>วันที่สิ้นสุด *</label><input type="date" name="end_date" required id="leave-end" /></div>
-        <div class="form-group"><label>จำนวนวัน</label><div class="days-display"><span id="leave-days-calc">1</span> วัน</div><input type="hidden" name="days" value="1" /></div>
-        <div class="form-group full-width"><label>เหตุผล *</label><textarea name="reason" rows="2" required placeholder="ระบุเหตุผลในการลา"></textarea></div>
-        <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="2"></textarea></div>
+        <div class="form-group">
+          <label>วันที่เริ่มลา *</label>
+          <input type="date" name="start_date" required id="leave-start" />
+        </div>
+        <div class="form-group">
+          <label>วันที่สิ้นสุด *</label>
+          <input type="date" name="end_date" required id="leave-end" />
+        </div>
+        <div class="form-group">
+          <label>จำนวนวัน</label>
+          <div class="days-display"><span id="leave-days-calc">1</span> วัน</div>
+          <input type="hidden" name="days" value="1" />
+        </div>
+        <div class="form-group full-width">
+          <label>เหตุผล *</label>
+          <textarea name="reason" rows="2" required placeholder="ระบุเหตุผลในการลา"></textarea>
+        </div>
+        <div class="form-group full-width">
+          <label>หมายเหตุ</label>
+          <textarea name="notes" rows="2"></textarea>
+        </div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
@@ -766,9 +989,9 @@
 <script src="js/salary.js"></script>
 <script src="js/performance.js"></script>
 <script src="js/leave.js"></script>
-<script src="js/profile.js"></script>
 <script src="js/holidays.js"></script>
-    <script src="js/app.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

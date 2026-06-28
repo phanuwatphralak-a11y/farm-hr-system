@@ -13,8 +13,7 @@ const LEAVE = {
     "approved_by","approved_date","notes"
   ],
 
-  // โควต้าวันลาต่อปี (anull = ไม่จำกัด
-)
+  // โควต้าวันลาต่อปี (null = ไม่จำกัด)
   QUOTA: {
     "ลาป่วย":    30,
     "ลากิจ":     3,
@@ -37,7 +36,7 @@ const LEAVE = {
 
   calcDays(start, end) {
     if (!start || !end) return 1;
-    // ใช้ HOLIDAYS.calcWorkdays ถ้ามี (ไม่นทับ วันหยุดและเสาร์-อาทิตย์)
+    // ใช้ HOLIDAYS.calcWorkdays ถ้ามี (ไม่นับวันหยุดและเสาร์-อาทิตย์)
     if (typeof HOLIDAYS !== "undefined") {
       return HOLIDAYS.calcWorkdays(start, end);
     }

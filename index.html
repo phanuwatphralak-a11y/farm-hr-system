@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ระบบ HR ฟาร์ม</title>
+  <title>à¸£à¸°à¸à¸ HR à¸à¸²à¸£à¹à¸¡</title>
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
@@ -15,12 +15,12 @@
   <div class="login-card">
     <div class="login-logo">
       <i class="fas fa-tractor"></i>
-      <h1>ระบบ HR ฟาร์ม</h1>
+      <h1>à¸£à¸°à¸à¸ HR à¸à¸²à¸£à¹à¸¡</h1>
       <p>Human Resource Management System</p>
     </div>
     <button id="btn-login" class="btn-google">
       <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" width="20" />
-      เข้าสู่ระบบด้วย Google
+      à¹à¸à¹à¸²à¸ªà¸¹à¹à¸£à¸°à¸à¸à¸à¹à¸§à¸¢ Google
     </button>
     <p id="login-error" class="login-error hidden"></p>
   </div>
@@ -34,19 +34,20 @@
     <div class="sidebar-header">
       <i class="fas fa-tractor sidebar-logo"></i>
       <div>
-        <h2>HR ฟาร์ม</h2>
+        <h2>HR à¸à¸²à¸£à¹à¸¡</h2>
         <span>Farm HR System</span>
       </div>
     </div>
 
     <ul class="sidebar-menu">
-      <li><a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i><span>ภาพรวม</span></a></li>
-      <li><a href="#" class="menu-item" data-page="employees"><i class="fas fa-users"></i><span>พนักงาน</span></a></li>
-      <li><a href="#" class="menu-item" data-page="attendance"><i class="fas fa-clock"></i><span>เวลาทำงาน</span></a></li>
-      <li><a href="#" class="menu-item" data-page="salary"><i class="fas fa-money-bill-wave"></i><span>เงินเดือน</span></a></li>
-      <li><a href="#" class="menu-item" data-page="performance"><i class="fas fa-star"></i><span>ประเมินผล</span></a></li>
-      <li><a href="#" class="menu-item" data-page="leave"><i class="fas fa-calendar-times"></i><span>การลา</span></a></li>
-    </ul>
+      <li><a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-chart-pie"></i><span>à¸ à¸²à¸à¸£à¸§à¸¡</span></a></li>
+      <li><a href="#" class="menu-item" data-page="employees"><i class="fas fa-users"></i><span>à¸à¸à¸±à¸à¸à¸²à¸</span></a></li>
+      <li><a href="#" class="menu-item" data-page="attendance"><i class="fas fa-clock"></i><span>à¹à¸§à¸¥à¸²à¸à¸³à¸à¸²à¸</span></a></li>
+      <li><a href="#" class="menu-item" data-page="salary"><i class="fas fa-money-bill-wave"></i><span>à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸</span></a></li>
+      <li><a href="#" class="menu-item" data-page="performance"><i class="fas fa-star"></i><span>à¸à¸£à¸°à¹à¸¡à¸´à¸à¸à¸¥</span></a></li>
+      <li><a href="#" class="menu-item" data-page="leave"><i class="fas fa-calendar-times"></i><span>à¸à¸²à¸£à¸¥à¸²</span></a></li>
+        <li><a href="#" class="menu-item" data-page="holidays"><i class="fas fa-calendar-star"></i><span>วันหยุดนักขัตฤกษ์</span></a></li>
+        </ul>
 
     <div class="sidebar-footer">
       <div class="user-info" id="user-info">
@@ -65,17 +66,17 @@
 
     <div class="topbar">
       <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
-      <h2 id="page-title">ภาพรวม</h2>
+      <h2 id="page-title">à¸ à¸²à¸à¸£à¸§à¸¡</h2>
       <div class="topbar-actions">
         <span id="last-sync" class="sync-info"></span>
-        <button class="btn-icon" id="btn-refresh" title="รีเฟรชข้อมูล"><i class="fas fa-sync-alt"></i></button>
+        <button class="btn-icon" id="btn-refresh" title="à¸£à¸µà¹à¸à¸£à¸à¸à¹à¸­à¸¡à¸¹à¸¥"><i class="fas fa-sync-alt"></i></button>
       </div>
     </div>
 
     <!-- Loading Overlay -->
     <div id="loading" class="loading hidden">
       <div class="spinner"></div>
-      <p>กำลังโหลดข้อมูล...</p>
+      <p>à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸à¸à¹à¸­à¸¡à¸¹à¸¥...</p>
     </div>
 
     <!-- ===== DASHBOARD PAGE ===== -->
@@ -85,28 +86,28 @@
           <div class="stat-icon"><i class="fas fa-users"></i></div>
           <div class="stat-info">
             <h3 id="stat-total-emp">-</h3>
-            <p>พนักงานทั้งหมด</p>
+            <p>à¸à¸à¸±à¸à¸à¸²à¸à¸à¸±à¹à¸à¸«à¸¡à¸</p>
           </div>
         </div>
         <div class="stat-card green">
           <div class="stat-icon"><i class="fas fa-user-check"></i></div>
           <div class="stat-info">
             <h3 id="stat-present">-</h3>
-            <p>มาทำงานวันนี้</p>
+            <p>à¸¡à¸²à¸à¸³à¸à¸²à¸à¸§à¸±à¸à¸à¸µà¹</p>
           </div>
         </div>
         <div class="stat-card orange">
           <div class="stat-icon"><i class="fas fa-user-times"></i></div>
           <div class="stat-info">
             <h3 id="stat-absent">-</h3>
-            <p>ขาด/ลาวันนี้</p>
+            <p>à¸à¸²à¸/à¸¥à¸²à¸§à¸±à¸à¸à¸µà¹</p>
           </div>
         </div>
         <div class="stat-card purple">
           <div class="stat-icon"><i class="fas fa-baht-sign"></i></div>
           <div class="stat-info">
             <h3 id="stat-salary">-</h3>
-            <p>ค่าจ้างเดือนนี้</p>
+            <p>à¸à¹à¸²à¸à¹à¸²à¸à¹à¸à¸·à¸­à¸à¸à¸µà¹</p>
           </div>
         </div>
       </div>
@@ -114,20 +115,20 @@
       <div class="dashboard-grid">
         <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-user-clock"></i> สถานะวันนี้</h3>
+            <h3><i class="fas fa-user-clock"></i> à¸ªà¸à¸²à¸à¸°à¸§à¸±à¸à¸à¸µà¹</h3>
             <span id="today-date" class="badge badge-blue"></span>
           </div>
           <div id="today-attendance-list" class="mini-list">
-            <p class="empty-msg">ไม่มีข้อมูล</p>
+            <p class="empty-msg">à¹à¸¡à¹à¸¡à¸µà¸à¹à¸­à¸¡à¸¹à¸¥</p>
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-star"></i> ประเมินล่าสุด</h3>
+            <h3><i class="fas fa-star"></i> à¸à¸£à¸°à¹à¸¡à¸´à¸à¸¥à¹à¸²à¸ªà¸¸à¸</h3>
           </div>
           <div id="recent-performance-list" class="mini-list">
-            <p class="empty-msg">ไม่มีข้อมูล</p>
+            <p class="empty-msg">à¹à¸¡à¹à¸¡à¸µà¸à¹à¸­à¸¡à¸¹à¸¥</p>
           </div>
         </div>
       </div>
@@ -138,10 +139,10 @@
       <div class="page-actions">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" id="emp-search" placeholder="ค้นหาพนักงาน..." />
+          <input type="text" id="emp-search" placeholder="à¸à¹à¸à¸«à¸²à¸à¸à¸±à¸à¸à¸²à¸..." />
         </div>
         <button class="btn btn-primary" id="btn-add-employee">
-          <i class="fas fa-plus"></i> เพิ่มพนักงาน
+          <i class="fas fa-plus"></i> à¹à¸à¸´à¹à¸¡à¸à¸à¸±à¸à¸à¸²à¸
         </button>
       </div>
 
@@ -149,18 +150,18 @@
         <table class="data-table" id="employees-table">
           <thead>
             <tr>
-              <th>รหัส</th>
-              <th>ชื่อ-นามสกุล</th>
-              <th>ตำแหน่ง</th>
-              <th>แผนก</th>
-              <th>วันที่เริ่มงาน</th>
-              <th>เบอร์โทร</th>
-              <th>สถานะ</th>
-              <th>จัดการ</th>
+              <th>à¸£à¸«à¸±à¸ª</th>
+              <th>à¸à¸·à¹à¸­-à¸à¸²à¸¡à¸ªà¸à¸¸à¸¥</th>
+              <th>à¸à¸³à¹à¸«à¸à¹à¸</th>
+              <th>à¹à¸à¸à¸</th>
+              <th>à¸§à¸±à¸à¸à¸µà¹à¹à¸£à¸´à¹à¸¡à¸à¸²à¸</th>
+              <th>à¹à¸à¸­à¸£à¹à¹à¸à¸£</th>
+              <th>à¸ªà¸à¸²à¸à¸°</th>
+              <th>à¸à¸±à¸à¸à¸²à¸£</th>
             </tr>
           </thead>
           <tbody id="employees-tbody">
-            <tr><td colspan="8" class="empty-msg">กำลังโหลด...</td></tr>
+            <tr><td colspan="8" class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</td></tr>
           </tbody>
         </table>
       </div>
@@ -170,36 +171,36 @@
     <section id="page-attendance" class="page hidden">
       <div class="page-actions">
         <div class="filter-group">
-          <label>เดือน:</label>
+          <label>à¹à¸à¸·à¸­à¸:</label>
           <input type="month" id="att-month" />
         </div>
         <div class="filter-group">
-          <label>พนักงาน:</label>
+          <label>à¸à¸à¸±à¸à¸à¸²à¸:</label>
           <select id="att-emp-filter">
-            <option value="">ทั้งหมด</option>
+            <option value="">à¸à¸±à¹à¸à¸«à¸¡à¸</option>
           </select>
         </div>
-        <button class="btn btn-secondary" id="btn-load-att"><i class="fas fa-filter"></i> กรอง</button>
-        <button class="btn btn-primary" id="btn-add-attendance"><i class="fas fa-plus"></i> บันทึกเวลา</button>
+        <button class="btn btn-secondary" id="btn-load-att"><i class="fas fa-filter"></i> à¸à¸£à¸­à¸</button>
+        <button class="btn btn-primary" id="btn-add-attendance"><i class="fas fa-plus"></i> à¸à¸±à¸à¸à¸¶à¸à¹à¸§à¸¥à¸²</button>
       </div>
 
       <div class="card">
         <table class="data-table">
           <thead>
             <tr>
-              <th>วันที่</th>
-              <th>รหัสพนักงาน</th>
-              <th>ชื่อ</th>
-              <th>เวลาเข้า</th>
-              <th>เวลาออก</th>
-              <th>ชั่วโมงทำงาน</th>
-              <th>สถานะ</th>
-              <th>หมายเหตุ</th>
-              <th>จัดการ</th>
+              <th>à¸§à¸±à¸à¸à¸µà¹</th>
+              <th>à¸£à¸«à¸±à¸ªà¸à¸à¸±à¸à¸à¸²à¸</th>
+              <th>à¸à¸·à¹à¸­</th>
+              <th>à¹à¸§à¸¥à¸²à¹à¸à¹à¸²</th>
+              <th>à¹à¸§à¸¥à¸²à¸­à¸­à¸</th>
+              <th>à¸à¸±à¹à¸§à¹à¸¡à¸à¸à¸³à¸à¸²à¸</th>
+              <th>à¸ªà¸à¸²à¸à¸°</th>
+              <th>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</th>
+              <th>à¸à¸±à¸à¸à¸²à¸£</th>
             </tr>
           </thead>
           <tbody id="attendance-tbody">
-            <tr><td colspan="9" class="empty-msg">กำลังโหลด...</td></tr>
+            <tr><td colspan="9" class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</td></tr>
           </tbody>
         </table>
       </div>
@@ -209,26 +210,26 @@
     <section id="page-salary" class="page hidden">
       <div class="page-actions">
         <div class="filter-group">
-          <label>เดือน:</label>
+          <label>à¹à¸à¸·à¸­à¸:</label>
           <input type="month" id="sal-month" />
         </div>
-        <button class="btn btn-secondary" id="btn-load-sal"><i class="fas fa-filter"></i> กรอง</button>
-        <button class="btn btn-primary" id="btn-add-salary"><i class="fas fa-plus"></i> บันทึกเงินเดือน</button>
+        <button class="btn btn-secondary" id="btn-load-sal"><i class="fas fa-filter"></i> à¸à¸£à¸­à¸</button>
+        <button class="btn btn-primary" id="btn-add-salary"><i class="fas fa-plus"></i> à¸à¸±à¸à¸à¸¶à¸à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸</button>
         <button class="btn btn-success" id="btn-export-salary"><i class="fas fa-file-excel"></i> Export</button>
       </div>
 
       <div class="stats-grid mini">
         <div class="stat-card green mini">
           <div class="stat-icon"><i class="fas fa-money-bill"></i></div>
-          <div class="stat-info"><h3 id="sal-total">฿0</h3><p>รวมจ่ายเดือนนี้</p></div>
+          <div class="stat-info"><h3 id="sal-total">à¸¿0</h3><p>à¸£à¸§à¸¡à¸à¹à¸²à¸¢à¹à¸à¸·à¸­à¸à¸à¸µà¹</p></div>
         </div>
         <div class="stat-card blue mini">
           <div class="stat-icon"><i class="fas fa-users"></i></div>
-          <div class="stat-info"><h3 id="sal-count">0</h3><p>จำนวนพนักงาน</p></div>
+          <div class="stat-info"><h3 id="sal-count">0</h3><p>à¸à¸³à¸à¸§à¸à¸à¸à¸±à¸à¸à¸²à¸</p></div>
         </div>
         <div class="stat-card orange mini">
           <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="stat-info"><h3 id="sal-avg">฿0</h3><p>เฉลี่ยต่อคน</p></div>
+          <div class="stat-info"><h3 id="sal-avg">à¸¿0</h3><p>à¹à¸à¸¥à¸µà¹à¸¢à¸à¹à¸­à¸à¸</p></div>
         </div>
       </div>
 
@@ -236,21 +237,21 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>เดือน</th>
-              <th>รหัสพนักงาน</th>
-              <th>ชื่อ</th>
-              <th>เงินเดือนฐาน</th>
-              <th>โอที</th>
-              <th>โบนัส</th>
-              <th>หัก</th>
-              <th>ปกส.</th>
-              <th>รวมสุทธิ</th>
-              <th>สถานะ</th>
-              <th>จัดการ</th>
+              <th>à¹à¸à¸·à¸­à¸</th>
+              <th>à¸£à¸«à¸±à¸ªà¸à¸à¸±à¸à¸à¸²à¸</th>
+              <th>à¸à¸·à¹à¸­</th>
+              <th>à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸à¸à¸²à¸</th>
+              <th>à¹à¸­à¸à¸µ</th>
+              <th>à¹à¸à¸à¸±à¸ª</th>
+              <th>à¸«à¸±à¸</th>
+              <th>à¸à¸à¸ª.</th>
+              <th>à¸£à¸§à¸¡à¸ªà¸¸à¸à¸à¸´</th>
+              <th>à¸ªà¸à¸²à¸à¸°</th>
+              <th>à¸à¸±à¸à¸à¸²à¸£</th>
             </tr>
           </thead>
           <tbody id="salary-tbody">
-            <tr><td colspan="11" class="empty-msg">กำลังโหลด...</td></tr>
+            <tr><td colspan="11" class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</td></tr>
           </tbody>
         </table>
       </div>
@@ -260,41 +261,41 @@
     <section id="page-performance" class="page hidden">
       <div class="page-actions">
         <div class="filter-group">
-          <label>ปี:</label>
+          <label>à¸à¸µ:</label>
           <select id="perf-year"></select>
         </div>
         <div class="filter-group">
-          <label>ไตรมาส:</label>
+          <label>à¹à¸à¸£à¸¡à¸²à¸ª:</label>
           <select id="perf-quarter">
-            <option value="">ทั้งหมด</option>
-            <option value="Q1">Q1 (ม.ค.-มี.ค.)</option>
-            <option value="Q2">Q2 (เม.ย.-มิ.ย.)</option>
-            <option value="Q3">Q3 (ก.ค.-ก.ย.)</option>
-            <option value="Q4">Q4 (ต.ค.-ธ.ค.)</option>
+            <option value="">à¸à¸±à¹à¸à¸«à¸¡à¸</option>
+            <option value="Q1">Q1 (à¸¡.à¸.-à¸¡à¸µ.à¸.)</option>
+            <option value="Q2">Q2 (à¹à¸¡.à¸¢.-à¸¡à¸´.à¸¢.)</option>
+            <option value="Q3">Q3 (à¸.à¸.-à¸.à¸¢.)</option>
+            <option value="Q4">Q4 (à¸.à¸.-à¸.à¸.)</option>
           </select>
         </div>
-        <button class="btn btn-secondary" id="btn-load-perf"><i class="fas fa-filter"></i> กรอง</button>
-        <button class="btn btn-primary" id="btn-add-performance"><i class="fas fa-plus"></i> บันทึกประเมิน</button>
+        <button class="btn btn-secondary" id="btn-load-perf"><i class="fas fa-filter"></i> à¸à¸£à¸­à¸</button>
+        <button class="btn btn-primary" id="btn-add-performance"><i class="fas fa-plus"></i> à¸à¸±à¸à¸à¸¶à¸à¸à¸£à¸°à¹à¸¡à¸´à¸</button>
       </div>
 
       <div class="card">
         <table class="data-table">
           <thead>
             <tr>
-              <th>วันที่ประเมิน</th>
-              <th>รหัสพนักงาน</th>
-              <th>ชื่อ</th>
-              <th>ไตรมาส/ปี</th>
-              <th>คุณภาพงาน</th>
-              <th>ความตรงต่อเวลา</th>
-              <th>ทีมเวิร์ค</th>
-              <th>คะแนนรวม</th>
-              <th>ระดับ</th>
-              <th>จัดการ</th>
+              <th>à¸§à¸±à¸à¸à¸µà¹à¸à¸£à¸°à¹à¸¡à¸´à¸</th>
+              <th>à¸£à¸«à¸±à¸ªà¸à¸à¸±à¸à¸à¸²à¸</th>
+              <th>à¸à¸·à¹à¸­</th>
+              <th>à¹à¸à¸£à¸¡à¸²à¸ª/à¸à¸µ</th>
+              <th>à¸à¸¸à¸à¸ à¸²à¸à¸à¸²à¸</th>
+              <th>à¸à¸§à¸²à¸¡à¸à¸£à¸à¸à¹à¸­à¹à¸§à¸¥à¸²</th>
+              <th>à¸à¸µà¸¡à¹à¸§à¸´à¸£à¹à¸</th>
+              <th>à¸à¸°à¹à¸à¸à¸£à¸§à¸¡</th>
+              <th>à¸£à¸°à¸à¸±à¸</th>
+              <th>à¸à¸±à¸à¸à¸²à¸£</th>
             </tr>
           </thead>
           <tbody id="performance-tbody">
-            <tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr>
+            <tr><td colspan="10" class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</td></tr>
           </tbody>
         </table>
       </div>
@@ -304,35 +305,64 @@
     <!-- ===== LEAVE PAGE ===== -->
     <section id="page-leave" class="page hidden">
       <div class="tab-bar">
-        <button class="leave-tab-btn active" data-tab="requests" onclick="LEAVE.switchTab('requests')"><i class="fas fa-list-alt"></i> คำขอลา</button>
-        <button class="leave-tab-btn" data-tab="quota" onclick="LEAVE.switchTab('quota')"><i class="fas fa-calendar-check"></i> โควต้าวันลา</button>
+        <button class="leave-tab-btn active" data-tab="requests" onclick="LEAVE.switchTab('requests')"><i class="fas fa-list-alt"></i> à¸à¸³à¸à¸­à¸¥à¸²</button>
+        <button class="leave-tab-btn" data-tab="quota" onclick="LEAVE.switchTab('quota')"><i class="fas fa-calendar-check"></i> à¹à¸à¸§à¸à¹à¸²à¸§à¸±à¸à¸¥à¸²</button>
       </div>
       <div id="leave-tab-requests">
         <div class="page-actions">
-          <div class="filter-group"><label>ปี:</label><select id="leave-year-filter"></select></div>
-          <div class="filter-group"><label>พนักงาน:</label><select id="leave-emp-filter-req"><option value="">ทั้งหมด</option></select></div>
-          <div class="filter-group"><label>สถานะ:</label>
+          <div class="filter-group"><label>à¸à¸µ:</label><select id="leave-year-filter"></select></div>
+          <div class="filter-group"><label>à¸à¸à¸±à¸à¸à¸²à¸:</label><select id="leave-emp-filter-req"><option value="">à¸à¸±à¹à¸à¸«à¸¡à¸</option></select></div>
+          <div class="filter-group"><label>à¸ªà¸à¸²à¸à¸°:</label>
             <select id="leave-status-filter">
-              <option value="">ทั้งหมด</option>
-              <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-              <option value="อนุมัติ">อนุมัติ</option>
-              <option value="ปฏิเสธ">ปฏิเสธ</option>
+              <option value="">à¸à¸±à¹à¸à¸«à¸¡à¸</option>
+              <option value="à¸£à¸­à¸à¸²à¸£à¸­à¸à¸¸à¸¡à¸±à¸à¸´">à¸£à¸­à¸à¸²à¸£à¸­à¸à¸¸à¸¡à¸±à¸à¸´</option>
+              <option value="à¸­à¸à¸¸à¸¡à¸±à¸à¸´">à¸­à¸à¸¸à¸¡à¸±à¸à¸´</option>
+              <option value="à¸à¸à¸´à¹à¸ªà¸">à¸à¸à¸´à¹à¸ªà¸</option>
             </select>
           </div>
-          <button class="btn btn-secondary" id="btn-load-leave"><i class="fas fa-filter"></i> กรอง</button>
-          <button class="btn btn-primary" id="btn-add-leave"><i class="fas fa-plus"></i> ยื่นคำขอลา</button>
+          <button class="btn btn-secondary" id="btn-load-leave"><i class="fas fa-filter"></i> à¸à¸£à¸­à¸</button>
+          <button class="btn btn-primary" id="btn-add-leave"><i class="fas fa-plus"></i> à¸¢à¸·à¹à¸à¸à¸³à¸à¸­à¸¥à¸²</button>
         </div>
         <div class="card">
           <table class="data-table">
-            <thead><tr><th>วันที่ยื่น</th><th>รหัส</th><th>ชื่อพนักงาน</th><th>ประเภทการลา</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>จำนวนวัน</th><th>เหตุผล</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
-            <tbody id="leave-tbody"><tr><td colspan="10" class="empty-msg">กำลังโหลด...</td></tr></tbody>
+            <thead><tr><th>à¸§à¸±à¸à¸à¸µà¹à¸¢à¸·à¹à¸</th><th>à¸£à¸«à¸±à¸ª</th><th>à¸à¸·à¹à¸­à¸à¸à¸±à¸à¸à¸²à¸</th><th>à¸à¸£à¸°à¹à¸ à¸à¸à¸²à¸£à¸¥à¸²</th><th>à¸§à¸±à¸à¹à¸£à¸´à¹à¸¡</th><th>à¸§à¸±à¸à¸ªà¸´à¹à¸à¸ªà¸¸à¸</th><th>à¸à¸³à¸à¸§à¸à¸§à¸±à¸</th><th>à¹à¸«à¸à¸¸à¸à¸¥</th><th>à¸ªà¸à¸²à¸à¸°</th><th>à¸à¸±à¸à¸à¸²à¸£</th></tr></thead>
+            <tbody id="leave-tbody"><tr><td colspan="10" class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</td></tr></tbody>
           </table>
         </div>
       </div>
-      <div id="leave-tab-quota" class="hidden"><div id="leave-quota-list"><p class="empty-msg">กำลังโหลด...</p></div></div>
+      <div id="leave-tab-quota" class="hidden"><div id="leave-quota-list"><p class="empty-msg">à¸à¸³à¸¥à¸±à¸à¹à¸«à¸¥à¸...</p></div></div>
     </section>
 
-  </main>
+  
+  <section id="page-holidays" class="page hidden">
+    <div class="page-header"><h2 class="page-title-sub">ปฏิทินวันหยุดนักขัตฤกษ์</h2></div>
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+      <div class="stat-card"><div class="stat-icon" style="background:#eff6ff"><i class="fas fa-calendar-alt" style="color:#2563eb"></i></div><div class="stat-info"><div class="stat-value" id="hol-count">-</div><div class="stat-label">วันหยุดทั้งหมด</div></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4"><i class="fas fa-calendar-check" style="color:#16a34a"></i></div><div class="stat-info"><div class="stat-value" id="hol-next-name" style="font-size:14px">-</div><div class="stat-label">วันหยุดถัดไป</div></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#fefce8"><i class="fas fa-clock" style="color:#ca8a04"></i></div><div class="stat-info"><div class="stat-value" id="hol-next-date" style="font-size:13px">-</div><div class="stat-label">วันที่</div></div></div>
+    </div>
+    <div class="card">
+      <div class="toolbar" style="margin-bottom:0">
+        <div class="toolbar-left">
+          <select id="hol-year-select" class="form-select" style="width:auto" onchange="HOLIDAYS.render(parseInt(this.value))">
+            <option value="2024">2024 (พ.ศ. 2567)</option>
+            <option value="2025">2025 (พ.ศ. 2568)</option>
+            <option value="2026" selected>2026 (พ.ศ. 2569)</option>
+          </select>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn btn-secondary" id="btn-add-holiday" onclick="HOLIDAYS._openAddModal()"><i class="fas fa-plus"></i> เพิ่มวันหยุดพิเศษ</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <table class="data-table">
+        <thead><tr><th>วันที่</th><th>วันในสัปดาห์</th><th>ชื่อวันหยุด</th><th></th></tr></thead>
+        <tbody id="hol-tbody"><tr><td colspan="4" class="empty-msg">กำลังโหลด...</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
 </div>
 
 <!-- ===== MODALS ===== -->
@@ -341,70 +371,70 @@
 <div id="modal-employee" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="modal-emp-title">เพิ่มพนักงาน</h3>
+      <h3 id="modal-emp-title">à¹à¸à¸´à¹à¸¡à¸à¸à¸±à¸à¸à¸²à¸</h3>
       <button class="modal-close" data-modal="modal-employee"><i class="fas fa-times"></i></button>
     </div>
     <form id="form-employee" class="modal-form">
       <div class="form-grid">
         <div class="form-group">
-          <label>รหัสพนักงาน *</label>
-          <input type="text" name="emp_id" required placeholder="เช่น EMP001" />
+          <label>à¸£à¸«à¸±à¸ªà¸à¸à¸±à¸à¸à¸²à¸ *</label>
+          <input type="text" name="emp_id" required placeholder="à¹à¸à¹à¸ EMP001" />
         </div>
         <div class="form-group">
-          <label>ชื่อ *</label>
-          <input type="text" name="first_name" required placeholder="ชื่อ" />
+          <label>à¸à¸·à¹à¸­ *</label>
+          <input type="text" name="first_name" required placeholder="à¸à¸·à¹à¸­" />
         </div>
         <div class="form-group">
-          <label>นามสกุล *</label>
-          <input type="text" name="last_name" required placeholder="นามสกุล" />
+          <label>à¸à¸²à¸¡à¸ªà¸à¸¸à¸¥ *</label>
+          <input type="text" name="last_name" required placeholder="à¸à¸²à¸¡à¸ªà¸à¸¸à¸¥" />
         </div>
         <div class="form-group">
-          <label>ตำแหน่ง *</label>
-          <input type="text" name="position" required placeholder="เช่น คนงานฟาร์ม" />
+          <label>à¸à¸³à¹à¸«à¸à¹à¸ *</label>
+          <input type="text" name="position" required placeholder="à¹à¸à¹à¸ à¸à¸à¸à¸²à¸à¸à¸²à¸£à¹à¸¡" />
         </div>
         <div class="form-group">
-          <label>แผนก</label>
+          <label>à¹à¸à¸à¸</label>
           <select name="department">
-            <option value="ฟาร์ม">ฟาร์ม</option>
-            <option value="โรงเรือน">โรงเรือน</option>
-            <option value="ขนส่ง">ขนส่ง</option>
-            <option value="บัญชี">บัญชี</option>
-            <option value="ทั่วไป">ทั่วไป</option>
+            <option value="à¸à¸²à¸£à¹à¸¡">à¸à¸²à¸£à¹à¸¡</option>
+            <option value="à¹à¸£à¸à¹à¸£à¸·à¸­à¸">à¹à¸£à¸à¹à¸£à¸·à¸­à¸</option>
+            <option value="à¸à¸à¸ªà¹à¸">à¸à¸à¸ªà¹à¸</option>
+            <option value="à¸à¸±à¸à¸à¸µ">à¸à¸±à¸à¸à¸µ</option>
+            <option value="à¸à¸±à¹à¸§à¹à¸">à¸à¸±à¹à¸§à¹à¸</option>
           </select>
         </div>
         <div class="form-group">
-          <label>วันที่เริ่มงาน *</label>
+          <label>à¸§à¸±à¸à¸à¸µà¹à¹à¸£à¸´à¹à¸¡à¸à¸²à¸ *</label>
           <input type="date" name="start_date" required />
         </div>
         <div class="form-group">
-          <label>เบอร์โทร</label>
+          <label>à¹à¸à¸­à¸£à¹à¹à¸à¸£</label>
           <input type="tel" name="phone" placeholder="0xx-xxx-xxxx" />
         </div>
         <div class="form-group">
-          <label>เงินเดือนฐาน (บาท)</label>
+          <label>à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸à¸à¸²à¸ (à¸à¸²à¸)</label>
           <input type="number" name="base_salary" placeholder="0" min="0" />
         </div>
         <div class="form-group">
-          <label>สถานะ</label>
+          <label>à¸ªà¸à¸²à¸à¸°</label>
           <select name="status">
-            <option value="ทำงาน">ทำงาน</option>
-            <option value="ลาออก">ลาออก</option>
-            <option value="พักงาน">พักงาน</option>
+            <option value="à¸à¸³à¸à¸²à¸">à¸à¸³à¸à¸²à¸</option>
+            <option value="à¸¥à¸²à¸­à¸­à¸">à¸¥à¸²à¸­à¸­à¸</option>
+            <option value="à¸à¸±à¸à¸à¸²à¸">à¸à¸±à¸à¸à¸²à¸</option>
           </select>
         </div>
         <div class="form-group full-width">
-          <label>ที่อยู่</label>
-          <textarea name="address" rows="2" placeholder="ที่อยู่ปัจจุบัน"></textarea>
+          <label>à¸à¸µà¹à¸­à¸¢à¸¹à¹</label>
+          <textarea name="address" rows="2" placeholder="à¸à¸µà¹à¸­à¸¢à¸¹à¹à¸à¸±à¸à¸à¸¸à¸à¸±à¸"></textarea>
         </div>
         <div class="form-group full-width">
-          <label>หมายเหตุ</label>
+          <label>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</label>
           <textarea name="notes" rows="2"></textarea>
         </div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-employee">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-employee">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> à¸à¸±à¸à¸à¸¶à¸</button>
       </div>
     </form>
   </div>
@@ -414,52 +444,52 @@
 <div id="modal-attendance" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="modal-att-title">บันทึกเวลาทำงาน</h3>
+      <h3 id="modal-att-title">à¸à¸±à¸à¸à¸¶à¸à¹à¸§à¸¥à¸²à¸à¸³à¸à¸²à¸</h3>
       <button class="modal-close" data-modal="modal-attendance"><i class="fas fa-times"></i></button>
     </div>
     <form id="form-attendance" class="modal-form">
       <div class="form-grid">
         <div class="form-group">
-          <label>วันที่ *</label>
+          <label>à¸§à¸±à¸à¸à¸µà¹ *</label>
           <input type="date" name="date" required />
         </div>
         <div class="form-group">
-          <label>พนักงาน *</label>
+          <label>à¸à¸à¸±à¸à¸à¸²à¸ *</label>
           <select name="emp_id" required id="att-emp-select">
-            <option value="">-- เลือกพนักงาน --</option>
+            <option value="">-- à¹à¸¥à¸·à¸­à¸à¸à¸à¸±à¸à¸à¸²à¸ --</option>
           </select>
         </div>
         <div class="form-group">
-          <label>เวลาเข้า</label>
+          <label>à¹à¸§à¸¥à¸²à¹à¸à¹à¸²</label>
           <input type="time" name="time_in" />
         </div>
         <div class="form-group">
-          <label>เวลาออก</label>
+          <label>à¹à¸§à¸¥à¸²à¸­à¸­à¸</label>
           <input type="time" name="time_out" />
         </div>
         <div class="form-group">
-          <label>สถานะ *</label>
+          <label>à¸ªà¸à¸²à¸à¸° *</label>
           <select name="status" required>
-            <option value="มา">มา</option>
-            <option value="ลาป่วย">ลาป่วย</option>
-            <option value="ลากิจ">ลากิจ</option>
-            <option value="ขาด">ขาด</option>
-            <option value="วันหยุด">วันหยุด</option>
+            <option value="à¸¡à¸²">à¸¡à¸²</option>
+            <option value="à¸¥à¸²à¸à¹à¸§à¸¢">à¸¥à¸²à¸à¹à¸§à¸¢</option>
+            <option value="à¸¥à¸²à¸à¸´à¸">à¸¥à¸²à¸à¸´à¸</option>
+            <option value="à¸à¸²à¸">à¸à¸²à¸</option>
+            <option value="à¸§à¸±à¸à¸«à¸¢à¸¸à¸">à¸§à¸±à¸à¸«à¸¢à¸¸à¸</option>
           </select>
         </div>
         <div class="form-group">
-          <label>OT (ชั่วโมง)</label>
+          <label>OT (à¸à¸±à¹à¸§à¹à¸¡à¸)</label>
           <input type="number" name="ot_hours" min="0" step="0.5" value="0" />
         </div>
         <div class="form-group full-width">
-          <label>หมายเหตุ</label>
+          <label>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</label>
           <textarea name="notes" rows="2"></textarea>
         </div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-attendance">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-attendance">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> à¸à¸±à¸à¸à¸¶à¸</button>
       </div>
     </form>
   </div>
@@ -469,70 +499,70 @@
 <div id="modal-salary" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="modal-sal-title">บันทึกเงินเดือน</h3>
+      <h3 id="modal-sal-title">à¸à¸±à¸à¸à¸¶à¸à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸</h3>
       <button class="modal-close" data-modal="modal-salary"><i class="fas fa-times"></i></button>
     </div>
     <form id="form-salary" class="modal-form">
       <div class="form-grid">
         <div class="form-group">
-          <label>เดือน *</label>
+          <label>à¹à¸à¸·à¸­à¸ *</label>
           <input type="month" name="month" required />
         </div>
         <div class="form-group">
-          <label>พนักงาน *</label>
+          <label>à¸à¸à¸±à¸à¸à¸²à¸ *</label>
           <select name="emp_id" required id="sal-emp-select">
-            <option value="">-- เลือกพนักงาน --</option>
+            <option value="">-- à¹à¸¥à¸·à¸­à¸à¸à¸à¸±à¸à¸à¸²à¸ --</option>
           </select>
         </div>
         <div class="form-group">
-          <label>เงินเดือนฐาน (บาท)</label>
+          <label>à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸à¸à¸²à¸ (à¸à¸²à¸)</label>
           <input type="number" name="base_salary" min="0" value="0" id="sal-base" />
         </div>
         <div class="form-group">
-          <label>ค่าโอที (บาท)</label>
+          <label>à¸à¹à¸²à¹à¸­à¸à¸µ (à¸à¸²à¸)</label>
           <input type="number" name="ot_pay" min="0" value="0" />
         </div>
         <div class="form-group">
-          <label>โบนัส (บาท)</label>
+          <label>à¹à¸à¸à¸±à¸ª (à¸à¸²à¸)</label>
           <input type="number" name="bonus" min="0" value="0" />
         </div>
         <div class="form-group">
-          <label>ค่าลด/หักอื่นๆ (บาท)</label>
+          <label>à¸à¹à¸²à¸¥à¸/à¸«à¸±à¸à¸­à¸·à¹à¸à¹ (à¸à¸²à¸)</label>
           <input type="number" name="deduction" min="0" value="0" />
         </div>
         <div class="form-group">
-          <label>ประกันสังคม (5%, อัตโนมัติ)</label>
+          <label>à¸à¸£à¸°à¸à¸±à¸à¸ªà¸±à¸à¸à¸¡ (5%, à¸­à¸±à¸à¹à¸à¸¡à¸±à¸à¸´)</label>
           <div style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--primary);font-weight:600">
-            <span id="sal-ss-display">฿0</span>
-            <small style="color:var(--text-muted);font-weight:400;margin-left:6px">เพดาน ฿750/เดือน</small>
+            <span id="sal-ss-display">à¸¿0</span>
+            <small style="color:var(--text-muted);font-weight:400;margin-left:6px">à¹à¸à¸à¸²à¸ à¸¿750/à¹à¸à¸·à¸­à¸</small>
           </div>
         </div>
         <div class="form-group">
-          <label>ภาษีหัก ณ ที่จ่าย (ประมาณการ)</label>
+          <label>à¸ à¸²à¸©à¸µà¸«à¸±à¸ à¸ à¸à¸µà¹à¸à¹à¸²à¸¢ (à¸à¸£à¸°à¸¡à¸²à¸à¸à¸²à¸£)</label>
           <div style="padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:14px;color:var(--warning,#d97706);font-weight:600">
-            <span id="sal-tax-display">฿0</span>
+            <span id="sal-tax-display">à¸¿0</span>
           </div>
         </div>
         <div class="form-group">
-          <label>รวมสุทธิ (บาท)</label>
+          <label>à¸£à¸§à¸¡à¸ªà¸¸à¸à¸à¸´ (à¸à¸²à¸)</label>
           <input type="number" name="net_pay" min="0" value="0" id="sal-net" readonly />
         </div>
         <div class="form-group">
-          <label>สถานะ</label>
+          <label>à¸ªà¸à¸²à¸à¸°</label>
           <select name="payment_status">
-            <option value="รอจ่าย">รอจ่าย</option>
-            <option value="จ่ายแล้ว">จ่ายแล้ว</option>
+            <option value="à¸£à¸­à¸à¹à¸²à¸¢">à¸£à¸­à¸à¹à¸²à¸¢</option>
+            <option value="à¸à¹à¸²à¸¢à¹à¸¥à¹à¸§">à¸à¹à¸²à¸¢à¹à¸¥à¹à¸§</option>
           </select>
         </div>
         <div class="form-group full-width">
-          <label>หมายเหตุ</label>
+          <label>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</label>
           <textarea name="notes" rows="2"></textarea>
         </div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-salary">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-salary">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> à¸à¸±à¸à¸à¸¶à¸</button>
       </div>
     </form>
   </div>
@@ -542,27 +572,27 @@
 <div id="modal-performance" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="modal-perf-title">บันทึกประเมินผลงาน</h3>
+      <h3 id="modal-perf-title">à¸à¸±à¸à¸à¸¶à¸à¸à¸£à¸°à¹à¸¡à¸´à¸à¸à¸¥à¸à¸²à¸</h3>
       <button class="modal-close" data-modal="modal-performance"><i class="fas fa-times"></i></button>
     </div>
     <form id="form-performance" class="modal-form">
       <div class="form-grid">
         <div class="form-group">
-          <label>วันที่ประเมิน *</label>
+          <label>à¸§à¸±à¸à¸à¸µà¹à¸à¸£à¸°à¹à¸¡à¸´à¸ *</label>
           <input type="date" name="eval_date" required />
         </div>
         <div class="form-group">
-          <label>พนักงาน *</label>
+          <label>à¸à¸à¸±à¸à¸à¸²à¸ *</label>
           <select name="emp_id" required id="perf-emp-select">
-            <option value="">-- เลือกพนักงาน --</option>
+            <option value="">-- à¹à¸¥à¸·à¸­à¸à¸à¸à¸±à¸à¸à¸²à¸ --</option>
           </select>
         </div>
         <div class="form-group">
-          <label>ปี *</label>
+          <label>à¸à¸µ *</label>
           <input type="number" name="year" required min="2020" max="2099" />
         </div>
         <div class="form-group">
-          <label>ไตรมาส *</label>
+          <label>à¹à¸à¸£à¸¡à¸²à¸ª *</label>
           <select name="quarter" required>
             <option value="Q1">Q1</option>
             <option value="Q2">Q2</option>
@@ -572,38 +602,38 @@
         </div>
 
         <div class="form-group">
-          <label>คุณภาพงาน (1-5)</label>
+          <label>à¸à¸¸à¸à¸ à¸²à¸à¸à¸²à¸ (1-5)</label>
           <input type="number" name="quality" min="1" max="5" step="0.5" value="3" class="perf-score" />
         </div>
         <div class="form-group">
-          <label>ความตรงต่อเวลา (1-5)</label>
+          <label>à¸à¸§à¸²à¸¡à¸à¸£à¸à¸à¹à¸­à¹à¸§à¸¥à¸² (1-5)</label>
           <input type="number" name="punctuality" min="1" max="5" step="0.5" value="3" class="perf-score" />
         </div>
         <div class="form-group">
-          <label>ทีมเวิร์ค (1-5)</label>
+          <label>à¸à¸µà¸¡à¹à¸§à¸´à¸£à¹à¸ (1-5)</label>
           <input type="number" name="teamwork" min="1" max="5" step="0.5" value="3" class="perf-score" />
         </div>
         <div class="form-group">
-          <label>ความรับผิดชอบ (1-5)</label>
+          <label>à¸à¸§à¸²à¸¡à¸£à¸±à¸à¸à¸´à¸à¸à¸­à¸ (1-5)</label>
           <input type="number" name="responsibility" min="1" max="5" step="0.5" value="3" class="perf-score" />
         </div>
         <div class="form-group">
-          <label>คะแนนรวม (อัตโนมัติ)</label>
+          <label>à¸à¸°à¹à¸à¸à¸£à¸§à¸¡ (à¸­à¸±à¸à¹à¸à¸¡à¸±à¸à¸´)</label>
           <input type="number" name="total_score" readonly id="perf-total" value="3.00" />
         </div>
         <div class="form-group">
-          <label>ระดับ</label>
+          <label>à¸£à¸°à¸à¸±à¸</label>
           <input type="text" name="grade" readonly id="perf-grade" value="C" />
         </div>
         <div class="form-group full-width">
-          <label>ความคิดเห็น/ข้อเสนอแนะ</label>
+          <label>à¸à¸§à¸²à¸¡à¸à¸´à¸à¹à¸«à¹à¸/à¸à¹à¸­à¹à¸ªà¸à¸­à¹à¸à¸°</label>
           <textarea name="comments" rows="3"></textarea>
         </div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-performance">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึก</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-performance">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> à¸à¸±à¸à¸à¸¶à¸</button>
       </div>
     </form>
   </div>
@@ -628,60 +658,60 @@
       <button class="modal-close" data-modal="modal-profile"><i class="fas fa-times"></i></button>
     </div>
     <div class="profile-tabs">
-      <button class="profile-tab-btn active" data-tab="personal" onclick="PROFILE.switchTab('personal')"><i class="fas fa-id-card"></i> ข้อมูลส่วนตัว</button>
-      <button class="profile-tab-btn" data-tab="emergency" onclick="PROFILE.switchTab('emergency')"><i class="fas fa-phone-alt"></i> ผู้ติดต่อฉุกเฉิน</button>
-      <button class="profile-tab-btn" data-tab="bank" onclick="PROFILE.switchTab('bank')"><i class="fas fa-university"></i> บัญชีธนาคาร</button>
-      <button class="profile-tab-btn" data-tab="hist-attendance" onclick="PROFILE.switchTab('hist-attendance')"><i class="fas fa-clock"></i> เวลาทำงาน</button>
-      <button class="profile-tab-btn" data-tab="hist-salary" onclick="PROFILE.switchTab('hist-salary')"><i class="fas fa-money-bill-wave"></i> เงินเดือน</button>
-      <button class="profile-tab-btn" data-tab="hist-leave" onclick="PROFILE.switchTab('hist-leave')"><i class="fas fa-calendar-times"></i> การลา</button>
-      <button class="profile-tab-btn" data-tab="hist-perf" onclick="PROFILE.switchTab('hist-perf')"><i class="fas fa-star"></i> ประเมินผล</button>
+      <button class="profile-tab-btn active" data-tab="personal" onclick="PROFILE.switchTab('personal')"><i class="fas fa-id-card"></i> à¸à¹à¸­à¸¡à¸¹à¸¥à¸ªà¹à¸§à¸à¸à¸±à¸§</button>
+      <button class="profile-tab-btn" data-tab="emergency" onclick="PROFILE.switchTab('emergency')"><i class="fas fa-phone-alt"></i> à¸à¸¹à¹à¸à¸´à¸à¸à¹à¸­à¸à¸¸à¸à¹à¸à¸´à¸</button>
+      <button class="profile-tab-btn" data-tab="bank" onclick="PROFILE.switchTab('bank')"><i class="fas fa-university"></i> à¸à¸±à¸à¸à¸µà¸à¸à¸²à¸à¸²à¸£</button>
+      <button class="profile-tab-btn" data-tab="hist-attendance" onclick="PROFILE.switchTab('hist-attendance')"><i class="fas fa-clock"></i> à¹à¸§à¸¥à¸²à¸à¸³à¸à¸²à¸</button>
+      <button class="profile-tab-btn" data-tab="hist-salary" onclick="PROFILE.switchTab('hist-salary')"><i class="fas fa-money-bill-wave"></i> à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸</button>
+      <button class="profile-tab-btn" data-tab="hist-leave" onclick="PROFILE.switchTab('hist-leave')"><i class="fas fa-calendar-times"></i> à¸à¸²à¸£à¸¥à¸²</button>
+      <button class="profile-tab-btn" data-tab="hist-perf" onclick="PROFILE.switchTab('hist-perf')"><i class="fas fa-star"></i> à¸à¸£à¸°à¹à¸¡à¸´à¸à¸à¸¥</button>
     </div>
     <form id="form-profile" class="modal-form">
       <div class="profile-tab-pane" data-tab="personal">
-        <div class="profile-section-title">ข้อมูลส่วนตัว</div>
+        <div class="profile-section-title">à¸à¹à¸­à¸¡à¸¹à¸¥à¸ªà¹à¸§à¸à¸à¸±à¸§</div>
         <div class="form-grid">
-          <div class="form-group"><label>เลขบัตรประชาชน</label><input type="text" name="national_id" placeholder="1-xxxx-xxxxx-xx-x" maxlength="17"/></div>
-          <div class="form-group"><label>วันเกิด</label><input type="date" name="birth_date" oninput="PROFILE._updateAge()"/></div>
-          <div class="form-group"><label>อายุ</label><div class="age-display" id="profile-age-display">-</div></div>
-          <div class="form-group"><label>เพศ</label><select name="gender"><option value="">-- เลือก --</option><option value="ชาย">ชาย</option><option value="หญิง">หญิง</option><option value="อื่นๆ">อื่นๆ</option></select></div>
-          <div class="form-group"><label>กรุ๊ปเลือด</label><select name="blood_type"><option value="">-- เลือก --</option><option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option></select></div>
-          <div class="form-group"><label>สถานภาพสมรส</label><select name="marital_status"><option value="">-- เลือก --</option><option value="โสด">โสด</option><option value="สมรส">สมรส</option><option value="หย่าร้าง">หย่าร้าง</option><option value="หม้าย">หม้าย</option></select></div>
-          <div class="form-group"><label>สัญชาติ</label><input type="text" name="nationality" placeholder="ไทย"/></div>
-          <div class="form-group"><label>ศาสนา</label><input type="text" name="religion" placeholder="พุทธ"/></div>
-          <div class="form-group"><label>ระดับการศึกษา</label><select name="education_level"><option value="">-- เลือก --</option><option value="ประถมศึกษา">ประถมศึกษา</option><option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option><option value="มัธยมศึกษาตอนปลาย/ปวช.">มัธยมศึกษาตอนปลาย/ปวช.</option><option value="อนุปริญญา/ปวส.">อนุปริญญา/ปวส.</option><option value="ปริญญาตรี">ปริญญาตรี</option><option value="ปริญญาโท">ปริญญาโท</option><option value="ปริญญาเอก">ปริญญาเอก</option></select></div>
-          <div class="form-group"><label>สถาบันการศึกษา</label><input type="text" name="education_institution" placeholder="ชื่อโรงเรียน/มหาวิทยาลัย"/></div>
-          <div class="form-group full-width"><label>ความสามารถพิเศษ / ทักษะ</label><textarea name="skills" rows="2" placeholder="เช่น ขับรถได้, ใช้เครื่องจักรการเกษตร, ภาษาพม่า"></textarea></div>
+          <div class="form-group"><label>à¹à¸¥à¸à¸à¸±à¸à¸£à¸à¸£à¸°à¸à¸²à¸à¸</label><input type="text" name="national_id" placeholder="1-xxxx-xxxxx-xx-x" maxlength="17"/></div>
+          <div class="form-group"><label>à¸§à¸±à¸à¹à¸à¸´à¸</label><input type="date" name="birth_date" oninput="PROFILE._updateAge()"/></div>
+          <div class="form-group"><label>à¸­à¸²à¸¢à¸¸</label><div class="age-display" id="profile-age-display">-</div></div>
+          <div class="form-group"><label>à¹à¸à¸¨</label><select name="gender"><option value="">-- à¹à¸¥à¸·à¸­à¸ --</option><option value="à¸à¸²à¸¢">à¸à¸²à¸¢</option><option value="à¸«à¸à¸´à¸">à¸«à¸à¸´à¸</option><option value="à¸­à¸·à¹à¸à¹">à¸­à¸·à¹à¸à¹</option></select></div>
+          <div class="form-group"><label>à¸à¸£à¸¸à¹à¸à¹à¸¥à¸·à¸­à¸</label><select name="blood_type"><option value="">-- à¹à¸¥à¸·à¸­à¸ --</option><option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option></select></div>
+          <div class="form-group"><label>à¸ªà¸à¸²à¸à¸ à¸²à¸à¸ªà¸¡à¸£à¸ª</label><select name="marital_status"><option value="">-- à¹à¸¥à¸·à¸­à¸ --</option><option value="à¹à¸ªà¸">à¹à¸ªà¸</option><option value="à¸ªà¸¡à¸£à¸ª">à¸ªà¸¡à¸£à¸ª</option><option value="à¸«à¸¢à¹à¸²à¸£à¹à¸²à¸">à¸«à¸¢à¹à¸²à¸£à¹à¸²à¸</option><option value="à¸«à¸¡à¹à¸²à¸¢">à¸«à¸¡à¹à¸²à¸¢</option></select></div>
+          <div class="form-group"><label>à¸ªà¸±à¸à¸à¸²à¸à¸´</label><input type="text" name="nationality" placeholder="à¹à¸à¸¢"/></div>
+          <div class="form-group"><label>à¸¨à¸²à¸ªà¸à¸²</label><input type="text" name="religion" placeholder="à¸à¸¸à¸à¸"/></div>
+          <div class="form-group"><label>à¸£à¸°à¸à¸±à¸à¸à¸²à¸£à¸¨à¸¶à¸à¸©à¸²</label><select name="education_level"><option value="">-- à¹à¸¥à¸·à¸­à¸ --</option><option value="à¸à¸£à¸°à¸à¸¡à¸¨à¸¶à¸à¸©à¸²">à¸à¸£à¸°à¸à¸¡à¸¨à¸¶à¸à¸©à¸²</option><option value="à¸¡à¸±à¸à¸¢à¸¡à¸¨à¸¶à¸à¸©à¸²à¸à¸­à¸à¸à¹à¸">à¸¡à¸±à¸à¸¢à¸¡à¸¨à¸¶à¸à¸©à¸²à¸à¸­à¸à¸à¹à¸</option><option value="à¸¡à¸±à¸à¸¢à¸¡à¸¨à¸¶à¸à¸©à¸²à¸à¸­à¸à¸à¸¥à¸²à¸¢/à¸à¸§à¸.">à¸¡à¸±à¸à¸¢à¸¡à¸¨à¸¶à¸à¸©à¸²à¸à¸­à¸à¸à¸¥à¸²à¸¢/à¸à¸§à¸.</option><option value="à¸­à¸à¸¸à¸à¸£à¸´à¸à¸à¸²/à¸à¸§à¸ª.">à¸­à¸à¸¸à¸à¸£à¸´à¸à¸à¸²/à¸à¸§à¸ª.</option><option value="à¸à¸£à¸´à¸à¸à¸²à¸à¸£à¸µ">à¸à¸£à¸´à¸à¸à¸²à¸à¸£à¸µ</option><option value="à¸à¸£à¸´à¸à¸à¸²à¹à¸">à¸à¸£à¸´à¸à¸à¸²à¹à¸</option><option value="à¸à¸£à¸´à¸à¸à¸²à¹à¸­à¸">à¸à¸£à¸´à¸à¸à¸²à¹à¸­à¸</option></select></div>
+          <div class="form-group"><label>à¸ªà¸à¸²à¸à¸±à¸à¸à¸²à¸£à¸¨à¸¶à¸à¸©à¸²</label><input type="text" name="education_institution" placeholder="à¸à¸·à¹à¸­à¹à¸£à¸à¹à¸£à¸µà¸¢à¸/à¸¡à¸«à¸²à¸§à¸´à¸à¸¢à¸²à¸¥à¸±à¸¢"/></div>
+          <div class="form-group full-width"><label>à¸à¸§à¸²à¸¡à¸ªà¸²à¸¡à¸²à¸£à¸à¸à¸´à¹à¸¨à¸© / à¸à¸±à¸à¸©à¸°</label><textarea name="skills" rows="2" placeholder="à¹à¸à¹à¸ à¸à¸±à¸à¸£à¸à¹à¸à¹, à¹à¸à¹à¹à¸à¸£à¸·à¹à¸­à¸à¸à¸±à¸à¸£à¸à¸²à¸£à¹à¸à¸©à¸à¸£, à¸ à¸²à¸©à¸²à¸à¸¡à¹à¸²"></textarea></div>
         </div>
       </div>
       <div class="profile-tab-pane hidden" data-tab="emergency">
-        <div class="profile-section-title">ผู้ติดต่อในกรณีฉุกเฉิน</div>
+        <div class="profile-section-title">à¸à¸¹à¹à¸à¸´à¸à¸à¹à¸­à¹à¸à¸à¸£à¸à¸µà¸à¸¸à¸à¹à¸à¸´à¸</div>
         <div class="form-grid">
-          <div class="form-group"><label>ชื่อผู้ติดต่อ</label><input type="text" name="emergency_name" placeholder="ชื่อ-นามสกุล"/></div>
-          <div class="form-group"><label>ความสัมพันธ์</label><input type="text" name="emergency_relation" placeholder="เช่น บิดา, มารดา, คู่สมรส"/></div>
-          <div class="form-group full-width"><label>เบอร์โทรศัพท์</label><input type="tel" name="emergency_phone" placeholder="0xx-xxx-xxxx"/></div>
+          <div class="form-group"><label>à¸à¸·à¹à¸­à¸à¸¹à¹à¸à¸´à¸à¸à¹à¸­</label><input type="text" name="emergency_name" placeholder="à¸à¸·à¹à¸­-à¸à¸²à¸¡à¸ªà¸à¸¸à¸¥"/></div>
+          <div class="form-group"><label>à¸à¸§à¸²à¸¡à¸ªà¸±à¸¡à¸à¸±à¸à¸à¹</label><input type="text" name="emergency_relation" placeholder="à¹à¸à¹à¸ à¸à¸´à¸à¸², à¸¡à¸²à¸£à¸à¸², à¸à¸¹à¹à¸ªà¸¡à¸£à¸ª"/></div>
+          <div class="form-group full-width"><label>à¹à¸à¸­à¸£à¹à¹à¸à¸£à¸¨à¸±à¸à¸à¹</label><input type="tel" name="emergency_phone" placeholder="0xx-xxx-xxxx"/></div>
         </div>
       </div>
       <div class="profile-tab-pane hidden" data-tab="bank">
-        <div class="profile-section-title">ข้อมูลบัญชีธนาคาร (สำหรับโอนเงินเดือน)</div>
+        <div class="profile-section-title">à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸±à¸à¸à¸µà¸à¸à¸²à¸à¸²à¸£ (à¸ªà¸³à¸«à¸£à¸±à¸à¹à¸­à¸à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸)</div>
         <div class="form-grid">
-          <div class="form-group"><label>ธนาคาร</label><select name="bank_name"><option value="">-- เลือกธนาคาร --</option><option value="กสิกรไทย">ธ.กสิกรไทย (KBANK)</option><option value="กรุงไทย">ธ.กรุงไทย (KTB)</option><option value="กรุงเทพ">ธ.กรุงเทพ (BBL)</option><option value="ไทยพาณิชย์">ธ.ไทยพาณิชย์ (SCB)</option><option value="ออมสิน">ธ.ออมสิน (GSB)</option><option value="กรุงศรี">ธ.กรุงศรี (BAY)</option><option value="ทหารไทยธนชาต">ธ.ทหารไทยธนชาต (TTB)</option><option value="UOB">ธ.ยูโอบี (UOB)</option><option value="อื่นๆ">อื่นๆ</option></select></div>
-          <div class="form-group"><label>เลขบัญชี</label><input type="text" name="bank_account" placeholder="xxx-x-xxxxx-x"/></div>
-          <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="3"></textarea></div>
+          <div class="form-group"><label>à¸à¸à¸²à¸à¸²à¸£</label><select name="bank_name"><option value="">-- à¹à¸¥à¸·à¸­à¸à¸à¸à¸²à¸à¸²à¸£ --</option><option value="à¸à¸ªà¸´à¸à¸£à¹à¸à¸¢">à¸.à¸à¸ªà¸´à¸à¸£à¹à¸à¸¢ (KBANK)</option><option value="à¸à¸£à¸¸à¸à¹à¸à¸¢">à¸.à¸à¸£à¸¸à¸à¹à¸à¸¢ (KTB)</option><option value="à¸à¸£à¸¸à¸à¹à¸à¸">à¸.à¸à¸£à¸¸à¸à¹à¸à¸ (BBL)</option><option value="à¹à¸à¸¢à¸à¸²à¸à¸´à¸à¸¢à¹">à¸.à¹à¸à¸¢à¸à¸²à¸à¸´à¸à¸¢à¹ (SCB)</option><option value="à¸­à¸­à¸¡à¸ªà¸´à¸">à¸.à¸­à¸­à¸¡à¸ªà¸´à¸ (GSB)</option><option value="à¸à¸£à¸¸à¸à¸¨à¸£à¸µ">à¸.à¸à¸£à¸¸à¸à¸¨à¸£à¸µ (BAY)</option><option value="à¸à¸«à¸²à¸£à¹à¸à¸¢à¸à¸à¸à¸²à¸">à¸.à¸à¸«à¸²à¸£à¹à¸à¸¢à¸à¸à¸à¸²à¸ (TTB)</option><option value="UOB">à¸.à¸¢à¸¹à¹à¸­à¸à¸µ (UOB)</option><option value="à¸­à¸·à¹à¸à¹">à¸­à¸·à¹à¸à¹</option></select></div>
+          <div class="form-group"><label>à¹à¸¥à¸à¸à¸±à¸à¸à¸µ</label><input type="text" name="bank_account" placeholder="xxx-x-xxxxx-x"/></div>
+          <div class="form-group full-width"><label>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</label><textarea name="notes" rows="3"></textarea></div>
         </div>
       </div>
-      <!-- Tab: ประวัติเวลาทำงาน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-attendance"><div class="profile-section-title">ประวัติเวลาทำงาน</div><div id="profile-hist-att"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
-      <!-- Tab: ประวัติเงินเดือน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-salary"><div class="profile-section-title">ประวัติเงินเดือน</div><div id="profile-hist-sal"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
-      <!-- Tab: ประวัติการลา -->
-      <div class="profile-tab-pane hidden" data-tab="hist-leave"><div class="profile-section-title">ประวัติการลา</div><div id="profile-hist-leave"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
-      <!-- Tab: ประวัติการประเมิน -->
-      <div class="profile-tab-pane hidden" data-tab="hist-perf"><div class="profile-section-title">ประวัติการประเมินผล</div><div id="profile-hist-perf"><p class="empty-msg">คลิกแท็บเพื่อโหลด</p></div></div>
+      <!-- Tab: à¸à¸£à¸°à¸§à¸±à¸à¸´à¹à¸§à¸¥à¸²à¸à¸³à¸à¸²à¸ -->
+      <div class="profile-tab-pane hidden" data-tab="hist-attendance"><div class="profile-section-title">à¸à¸£à¸°à¸§à¸±à¸à¸´à¹à¸§à¸¥à¸²à¸à¸³à¸à¸²à¸</div><div id="profile-hist-att"><p class="empty-msg">à¸à¸¥à¸´à¸à¹à¸à¹à¸à¹à¸à¸·à¹à¸­à¹à¸«à¸¥à¸</p></div></div>
+      <!-- Tab: à¸à¸£à¸°à¸§à¸±à¸à¸´à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸ -->
+      <div class="profile-tab-pane hidden" data-tab="hist-salary"><div class="profile-section-title">à¸à¸£à¸°à¸§à¸±à¸à¸´à¹à¸à¸´à¸à¹à¸à¸·à¸­à¸</div><div id="profile-hist-sal"><p class="empty-msg">à¸à¸¥à¸´à¸à¹à¸à¹à¸à¹à¸à¸·à¹à¸­à¹à¸«à¸¥à¸</p></div></div>
+      <!-- Tab: à¸à¸£à¸°à¸§à¸±à¸à¸´à¸à¸²à¸£à¸¥à¸² -->
+      <div class="profile-tab-pane hidden" data-tab="hist-leave"><div class="profile-section-title">à¸à¸£à¸°à¸§à¸±à¸à¸´à¸à¸²à¸£à¸¥à¸²</div><div id="profile-hist-leave"><p class="empty-msg">à¸à¸¥à¸´à¸à¹à¸à¹à¸à¹à¸à¸·à¹à¸­à¹à¸«à¸¥à¸</p></div></div>
+      <!-- Tab: à¸à¸£à¸°à¸§à¸±à¸à¸´à¸à¸²à¸£à¸à¸£à¸°à¹à¸¡à¸´à¸ -->
+      <div class="profile-tab-pane hidden" data-tab="hist-perf"><div class="profile-section-title">à¸à¸£à¸°à¸§à¸±à¸à¸´à¸à¸²à¸£à¸à¸£à¸°à¹à¸¡à¸´à¸à¸à¸¥</div><div id="profile-hist-perf"><p class="empty-msg">à¸à¸¥à¸´à¸à¹à¸à¹à¸à¹à¸à¸·à¹à¸­à¹à¸«à¸¥à¸</p></div></div>
       <input type="hidden" name="emp_id"/>
       <input type="hidden" name="row_index"/>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-profile">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> บันทึกข้อมูลส่วนตัว</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-profile">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> à¸à¸±à¸à¸à¸¶à¸à¸à¹à¸­à¸¡à¸¹à¸¥à¸ªà¹à¸§à¸à¸à¸±à¸§</button>
       </div>
     </form>
   </div>
@@ -691,32 +721,32 @@
 <div id="modal-leave" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
-      <h3 id="modal-leave-title">ยื่นคำขอลา</h3>
+      <h3 id="modal-leave-title">à¸¢à¸·à¹à¸à¸à¸³à¸à¸­à¸¥à¸²</h3>
       <button class="modal-close" data-modal="modal-leave"><i class="fas fa-times"></i></button>
     </div>
     <form id="form-leave" class="modal-form">
       <div class="form-grid">
-        <div class="form-group"><label>วันที่ยื่นคำขอ</label><input type="date" name="request_date" required /></div>
-        <div class="form-group"><label>พนักงาน *</label><select name="emp_id" required id="leave-emp-select"><option value="">-- เลือกพนักงาน --</option></select></div>
-        <div class="form-group full-width"><label>ประเภทการลา *</label>
+        <div class="form-group"><label>à¸§à¸±à¸à¸à¸µà¹à¸¢à¸·à¹à¸à¸à¸³à¸à¸­</label><input type="date" name="request_date" required /></div>
+        <div class="form-group"><label>à¸à¸à¸±à¸à¸à¸²à¸ *</label><select name="emp_id" required id="leave-emp-select"><option value="">-- à¹à¸¥à¸·à¸­à¸à¸à¸à¸±à¸à¸à¸²à¸ --</option></select></div>
+        <div class="form-group full-width"><label>à¸à¸£à¸°à¹à¸ à¸à¸à¸²à¸£à¸¥à¸² *</label>
           <select name="leave_type" required>
-            <option value="ลาป่วย">ลาป่วย (สูงสุด 30 วัน/ปี)</option>
-            <option value="ลากิจ">ลากิจ (สูงสุด 3 วัน/ปี)</option>
-            <option value="ลาพักร้อน">ลาพักร้อน (สูงสุด 6 วัน/ปี)</option>
-            <option value="ลาคลอด">ลาคลอด (สูงสุด 90 วัน)</option>
-            <option value="ลาอื่นๆ">ลาอื่นๆ</option>
+            <option value="à¸¥à¸²à¸à¹à¸§à¸¢">à¸¥à¸²à¸à¹à¸§à¸¢ (à¸ªà¸¹à¸à¸ªà¸¸à¸ 30 à¸§à¸±à¸/à¸à¸µ)</option>
+            <option value="à¸¥à¸²à¸à¸´à¸">à¸¥à¸²à¸à¸´à¸ (à¸ªà¸¹à¸à¸ªà¸¸à¸ 3 à¸§à¸±à¸/à¸à¸µ)</option>
+            <option value="à¸¥à¸²à¸à¸±à¸à¸£à¹à¸­à¸">à¸¥à¸²à¸à¸±à¸à¸£à¹à¸­à¸ (à¸ªà¸¹à¸à¸ªà¸¸à¸ 6 à¸§à¸±à¸/à¸à¸µ)</option>
+            <option value="à¸¥à¸²à¸à¸¥à¸­à¸">à¸¥à¸²à¸à¸¥à¸­à¸ (à¸ªà¸¹à¸à¸ªà¸¸à¸ 90 à¸§à¸±à¸)</option>
+            <option value="à¸¥à¸²à¸­à¸·à¹à¸à¹">à¸¥à¸²à¸­à¸·à¹à¸à¹</option>
           </select>
         </div>
-        <div class="form-group"><label>วันที่เริ่มลา *</label><input type="date" name="start_date" required id="leave-start" /></div>
-        <div class="form-group"><label>วันที่สิ้นสุด *</label><input type="date" name="end_date" required id="leave-end" /></div>
-        <div class="form-group"><label>จำนวนวัน</label><div class="days-display"><span id="leave-days-calc">1</span> วัน</div><input type="hidden" name="days" value="1" /></div>
-        <div class="form-group full-width"><label>เหตุผล *</label><textarea name="reason" rows="2" required placeholder="ระบุเหตุผลในการลา"></textarea></div>
-        <div class="form-group full-width"><label>หมายเหตุ</label><textarea name="notes" rows="2"></textarea></div>
+        <div class="form-group"><label>à¸§à¸±à¸à¸à¸µà¹à¹à¸£à¸´à¹à¸¡à¸¥à¸² *</label><input type="date" name="start_date" required id="leave-start" /></div>
+        <div class="form-group"><label>à¸§à¸±à¸à¸à¸µà¹à¸ªà¸´à¹à¸à¸ªà¸¸à¸ *</label><input type="date" name="end_date" required id="leave-end" /></div>
+        <div class="form-group"><label>à¸à¸³à¸à¸§à¸à¸§à¸±à¸</label><div class="days-display"><span id="leave-days-calc">1</span> à¸§à¸±à¸</div><input type="hidden" name="days" value="1" /></div>
+        <div class="form-group full-width"><label>à¹à¸«à¸à¸¸à¸à¸¥ *</label><textarea name="reason" rows="2" required placeholder="à¸£à¸°à¸à¸¸à¹à¸«à¸à¸¸à¸à¸¥à¹à¸à¸à¸²à¸£à¸¥à¸²"></textarea></div>
+        <div class="form-group full-width"><label>à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</label><textarea name="notes" rows="2"></textarea></div>
       </div>
       <input type="hidden" name="row_index" value="" />
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-leave">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> ยื่นคำขอ</button>
+        <button type="button" class="btn btn-secondary modal-close" data-modal="modal-leave">à¸¢à¸à¹à¸¥à¸´à¸</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> à¸¢à¸·à¹à¸à¸à¸³à¸à¸­</button>
       </div>
     </form>
   </div>
@@ -736,7 +766,8 @@
 <script src="js/performance.js"></script>
 <script src="js/leave.js"></script>
 <script src="js/profile.js"></script>
-<script src="js/app.js"></script>
+<script src="js/holidays.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 </html>

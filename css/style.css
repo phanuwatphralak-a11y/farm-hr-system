@@ -102,10 +102,230 @@ body {
   color: var(--primary);
 }
 
+.login-form {
+  text-align: left;
+  margin-top: 8px;
+}
+
+.login-form .form-group {
+  margin-bottom: 16px;
+}
+
+.login-form .form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.login-form .form-label i {
+  margin-right: 5px;
+  width: 14px;
+}
+
+.login-form .form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.login-form .form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .form-input {
+  padding-right: 44px;
+}
+
+.btn-show-pw {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 6px;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.btn-show-pw:hover { color: var(--primary); }
+
+.login-options {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
 .login-error {
-  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
   color: var(--danger);
   font-size: 13px;
+}
+
+.login-error i { flex-shrink: 0; }
+
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-login:hover:not(:disabled) { background: #1d4ed8; }
+.btn-login:active:not(:disabled) { transform: scale(0.98); }
+.btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.login-hint {
+  margin-top: 20px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+  text-align: center;
+}
+
+.login-hint p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Role badge in sidebar */
+#user-role {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+/* Role-based UI visibility */
+body.role-viewer .btn-add,
+body.role-viewer .btn-sm-del,
+body.role-viewer [onclick*="openAdd"],
+body.role-viewer [onclick*="openEdit"],
+body.role-viewer [onclick*="confirmDelete"],
+body.role-viewer [onclick*="_deleteRow"] {
+  display: none !important;
+}
+
+body.role-manager .btn-sm-del,
+body.role-manager [onclick*="confirmDelete"],
+body.role-manager [onclick*="_deleteRow"] {
+  display: none !important;
+}
+
+/* ─── Shift Type Selector ─── */
+.shift-type-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.shift-option {
+  cursor: pointer;
+}
+
+.shift-option input[type="radio"] {
+  display: none;
+}
+
+.shift-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg);
+  transition: all 0.2s;
+  text-align: center;
+  gap: 4px;
+}
+
+.shift-btn small {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.shift-option input[type="radio"]:checked + .shift-btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: #eff6ff;
+}
+
+/* ─── Calc Display Box ─── */
+.calc-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.calc-display i {
+  font-size: 13px;
+  opacity: 0.7;
 }
 
 /* ===== APP LAYOUT ===== */
@@ -346,7 +566,7 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ===== STATQ CARDQ�===== */
+/* ===== STATS CARDS ===== */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -757,7 +977,6 @@ body {
 .score-c { color: #d97706; font-weight: 700; }
 .score-d { color: #dc2626; font-weight: 700; }
 
-
 /* ===== PROFILE BUTTON ===== */
 .btn-sm-profile { background: var(--purple-light); color: var(--purple); }
 .btn-sm-profile:hover { background: var(--purple); color: white; }
@@ -798,157 +1017,4 @@ body {
 }
 
 .profile-tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 16px;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-family: 'Sarabun', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  margin-bottom: -1px;
-}
-
-.profile-tab-btn:hover { color: var(--primary); }
-.profile-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: transparent; }
-
-.profile-tab-pane { padding: 0; }
-
-.profile-section-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.age-display {
-  padding: 9px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--bg);
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-/* ===== LEAVE TABS ===== */
-.tab-bar {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-  background: white;
-  border-radius: var(--radius);
-  padding: 6px;
-  box-shadow: var(--shadow);
-  width: fit-content;
-}
-
-.leave-tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--text-muted);
-  font-family: 'Sarabun', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.leave-tab-btn:hover { background: var(--bg); color: var(--text); }
-.leave-tab-btn.active { background: var(--primary); color: white; }
-
-/* ===== APPROVE / REJECT ===== */
-.btn-sm-approve { background: #f0fdf4; color: var(--success); }
-.btn-sm-approve:hover { background: var(--success); color: white; }
-.btn-sm-reject { background: #fef2f2; color: var(--danger); }
-.btn-sm-reject:hover { background: var(--danger); color: white; }
-
-/* ===== QUOTA ===== */
-.quota-year-label {
-  font-size: 15px; font-weight: 700; color: var(--text);
-  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
-}
-.quota-year-label i { color: var(--success); }
-.quota-table-wrap { overflow-x: auto; }
-.quota-cell { display: flex; flex-direction: column; gap: 5px; min-width: 90px; font-size: 13px; }
-.quota-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-.quota-fill { height: 100%; background: var(--success); border-radius: 99px; transition: width 0.4s ease; }
-.quota-fill.over { background: var(--danger); }
-.text-danger { color: var(--danger); font-weight: 700; }
-.td-reason { max-width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.days-display {
-  padding: 9px 12px; border: 1px solid var(--border);
-  border-radius: var(--radius-sm); background: var(--primary-light);
-  font-size: 18px; font-weight: 700; color: var(--primary);
-}
-/* ===== PROFILE HISTORY TABS ===== */
-.profile-tabs { flex-wrap: wrap; }
-
-.hist-summary {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 10px 14px;
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  margin-bottom: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.hist-summary span { color: var(--primary); }
-
-.hist-table-wrap {
-  overflow-x: auto;
-  max-height: 340px;
-  overflow-y: auto;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-}
-
-.hist-table-wrap .data-table { margin: 0; }
-
-.text-right { text-align: right; }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .menu-toggle { display: flex; }
-
-  .main-content { margin-left: 0; }
-
-  .dashboard-grid { grid-template-columns: 1fr; }
-
-  .form-grid { grid-template-columns: 1fr; }
-
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-
-  .page-actions { flex-direction: column; align-items: stretch; }
-
-  .search-box { max-width: 100%; }
-
-  .data-table { font-size: 12px; }
-  .data-table thead th, .data-table tbody td { padding: 8px 10px; }
-
-  .modal-content { max-width: 100%; max-height: 95vh; }
-}
+  display: fl

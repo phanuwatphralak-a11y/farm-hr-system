@@ -1,30 +1,54 @@
 /**
  * salary.js — จัดการเงินเดือน/ค่าจ้าง
  * คอลัมน์ Sheet: month | emp_id | emp_name | base_salary | ot_pay |
- *                bonus | deduction | net_pay | payment_status | notes
+ *                bonus | deduction | net_pay | payment_status | notes |
+ *                ot_hours | ot_rate | ss_enrolled
+ *
+ * ot_rate     : ตัวเลขคูณ OT (0, 1, 1.5, 2)
+ * ss_enrolled : "1" = เข้าร่วมประกันสังคม, "0" = ไม่เข้าร่วม
  */
 
 const SALARY = {
-  COLS: ["month","emp_id","emp_name","base_salary","ot_pay",
-         "bonus","deduction","net_pay","payment_status","notes"],
+  COLS: [
+    "month","emp_id","emp_name","base_salary","ot_pay",
+    "bonus","deduction","net_pay","payment_status","notes",
+    "ot_hours","ot_rate","ss_enrolled"
+  ],
 
   rowToObj(row) {
     const obj = {};
-    this.COLS.forEach((k, i) => obj[k] = row[i] || "");
+    this.COLS.forEach((k, i) => obj[k] = row[i] !== undefined ? String(row[i]) : "");
     return obj;
   },
 
   objToRow(obj) {
-    return this.COLS.map(k => obj[k] || "");
+    return this.COLS.map(k => obj[k] !== undefined ? obj[k] : "");
   },
 
-  // ===== ประกันสังคม 5% เพดาน 750 บาท =====
-  calcSS(base) {
-    const b = parseFloat(base) || 0;
-    return Math.min(Math.round(b * 0.05), 750);
+  /* ── ค่าชั่วโมงปกติ ── */
+  _hourlyRate(base) {
+    const dpm = CONFIG.WORK?.DAYS_PER_MONTH ?? 26;
+    const hpd = CONFIG.WORK?.HOURS_PER_DAY  ?? 8;
+    return (parseFloat(base) || 0) / dpm / hpd;
   },
 
-  // ===== ภาษีหัก ณ ที่จ่าย (ประมาณการรายเดือน) =====
+  /* ── คำนวณค่า OT ── */
+  calcOTPay(base, otHours, otRate) {
+    const h = parseFloat(otHours) || 0;
+    const r = parseFloat(otRate)  || 0;
+    if (h === 0 || r === 0) return 0;
+    return Math.round(this._hourlyRate(base) * h * r);
+  },
+
+  /* ── ประกันสังคม ── */
+  calcSS(base, enrolled = true) {
+    if (!enrolled) return 0;
+    const rate = CONFIG.WORK?.SS_RATE ?? 0.05;
+    const max  = CONFIG.WORK?.SS_MAX  ?? 750;
+    return Math.min(Math.round((parseFloat(base) || 0) * rate), max);
+  },
+
+  /* ── ภาษีหัก ณ ที่จ่าย (ประมาณการรายเดือน) ── */
   calcTax(base, ot = 0, bonus = 0) {
     const monthly = (parseFloat(base)||0) + (parseFloat(ot)||0) + (parseFloat(bonus)||0);
     const annual  = monthly * 12;
@@ -45,9 +69,16 @@ const SALARY = {
     return Math.round(annualTax / 12);
   },
 
-  calcNet(base, ot, bonus, deduction) {
-    return (parseFloat(base)||0) + (parseFloat(ot)||0) +
-           (parseFloat(bonus)||0) - (parseFloat(deduction)||0);
+  /* ── คำนวณ net pay ── */
+  calcNet(base, otPay, bonus, ss, tax, deduction) {
+    return Math.max(0,
+      (parseFloat(base)      || 0) +
+      (parseFloat(otPay)     || 0) +
+      (parseFloat(bonus)     || 0) -
+      (parseFloat(ss)        || 0) -
+      (parseFloat(tax)       || 0) -
+      (parseFloat(deduction) || 0)
+    );
   },
 
   async load(month = "") {
@@ -60,24 +91,30 @@ const SALARY = {
 
   render(list) {
     const tbody = document.getElementById("salary-tbody");
-    if (!list || !list.length) {
-      tbody.innerHTML = `<tr><td colspan="11" class="empty-msg">ไม่พบข้อมูลเงินเดือน</td></tr>`;
+    if (!list?.length) {
+      tbody.innerHTML = `<tr><td colspan="12" class="empty-msg">ไม่พบข้อมูลเงินเดือน</td></tr>`;
       this.updateSummary([]);
       return;
     }
 
     tbody.innerHTML = list.map(s => {
-      const ss = this.calcSS(s.base_salary);
+      const ssEnrolled = s.ss_enrolled !== "0";
+      const ss  = this.calcSS(s.base_salary, ssEnrolled);
+      const ssBadge = ssEnrolled
+        ? `<span style="color:var(--primary);font-size:11px">${formatMoney(ss)}</span>`
+        : `<span style="color:var(--text-muted);font-size:11px">ไม่เข้าร่วม</span>`;
+      const otInfo = parseFloat(s.ot_hours) > 0
+        ? `<small style="color:var(--text-muted)"><br>${s.ot_hours}ชม.×${s.ot_rate}x</small>` : "";
       return `
       <tr>
         <td>${formatMonth(s.month)}</td>
         <td><strong>${s.emp_id}</strong></td>
         <td>${s.emp_name || "-"}</td>
         <td>${formatMoney(s.base_salary)}</td>
-        <td>${formatMoney(s.ot_pay)}</td>
+        <td>${formatMoney(s.ot_pay)}${otInfo}</td>
         <td>${formatMoney(s.bonus)}</td>
         <td style="color:var(--danger)">${formatMoney(s.deduction)}</td>
-        <td style="color:var(--text-muted);font-size:12px">${formatMoney(ss)}</td>
+        <td>${ssBadge}</td>
         <td><strong>${formatMoney(s.net_pay)}</strong></td>
         <td>${statusBadge(s.payment_status)}</td>
         <td>
@@ -104,7 +141,8 @@ const SALARY = {
     const count = list.length;
     document.getElementById("sal-total").textContent = "฿" + total.toLocaleString("th-TH");
     document.getElementById("sal-count").textContent = count;
-    document.getElementById("sal-avg").textContent = count ? "฿" + Math.round(total / count).toLocaleString("th-TH") : "฿0";
+    document.getElementById("sal-avg").textContent   = count
+      ? "฿" + Math.round(total / count).toLocaleString("th-TH") : "฿0";
   },
 
   openAdd() {
@@ -113,11 +151,14 @@ const SALARY = {
     form.querySelector("[name=row_index]").value = "";
     const now = new Date();
     form.querySelector("[name=month]").value =
-      `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
+      `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    // ค่าเริ่มต้น
+    form.querySelector("[name=ot_rate]").value   = "1.5";
+    form.querySelector("[name=ss_enrolled]").checked = true;
     document.getElementById("modal-sal-title").textContent = "บันทึกเงินเดือน";
     openModal("modal-salary");
     this.bindSalaryCalc(form);
-    this._refreshSSDisplay(form);
+    this.recalc(form);
   },
 
   openEdit(dataIndex) {
@@ -125,82 +166,96 @@ const SALARY = {
     if (!s) return;
     const form = document.getElementById("form-salary");
     form.reset();
+    // fill existing cols (ยกเว้น ss_enrolled ที่เป็น checkbox)
     this.COLS.forEach(k => {
+      if (k === "ss_enrolled") return;
       const el = form.querySelector(`[name=${k}]`);
       if (el) el.value = s[k] || "";
     });
+    // ss_enrolled checkbox
+    form.querySelector("[name=ss_enrolled]").checked = s.ss_enrolled !== "0";
     form.querySelector("[name=row_index]").value = s._row;
+    form.querySelector("[name=ot_rate]").value   = s.ot_rate  || "1.5";
     document.getElementById("modal-sal-title").textContent = "แก้ไขเงินเดือน";
     openModal("modal-salary");
     this.bindSalaryCalc(form);
-    this._refreshSSDisplay(form);
-  },
-
-  _refreshSSDisplay(form) {
-    const base  = parseFloat(form.querySelector("[name=base_salary]")?.value) || 0;
-    const ot    = parseFloat(form.querySelector("[name=ot_pay]")?.value) || 0;
-    const bonus = parseFloat(form.querySelector("[name=bonus]")?.value) || 0;
-    const ssEl  = document.getElementById("sal-ss-display");
-    const taxEl = document.getElementById("sal-tax-display");
-    if (ssEl)  ssEl.textContent  = "฿" + this.calcSS(base).toLocaleString("th-TH");
-    if (taxEl) taxEl.textContent = "฿" + this.calcTax(base, ot, bonus).toLocaleString("th-TH");
+    this.recalc(form);
   },
 
   bindSalaryCalc(form) {
-    const empSelect = form.querySelector("[name=emp_id]");
-    empSelect.addEventListener("change", () => {
-      const emp = STATE.employees.find(e => e.emp_id === empSelect.value);
-      if (emp && emp.base_salary) {
+    // auto-fill base_salary เมื่อเลือกพนักงาน
+    form.querySelector("[name=emp_id]")?.addEventListener("change", () => {
+      const empId = form.querySelector("[name=emp_id]").value;
+      const emp   = STATE.employees.find(e => e.emp_id === empId);
+      if (emp?.base_salary) {
         form.querySelector("[name=base_salary]").value = emp.base_salary;
         this.recalc(form);
       }
     });
-    ["base_salary","ot_pay","bonus","deduction"].forEach(name => {
-      form.querySelector(`[name=${name}]`).addEventListener("input", () => this.recalc(form));
+    // recalc เมื่อค่าเปลี่ยน
+    ["base_salary","ot_hours","ot_rate","bonus","deduction"].forEach(name => {
+      form.querySelector(`[name=${name}]`)?.addEventListener("input", () => this.recalc(form));
     });
+    form.querySelector("[name=ss_enrolled]")?.addEventListener("change", () => this.recalc(form));
   },
 
   recalc(form) {
-    const base  = parseFloat(form.querySelector("[name=base_salary]").value) || 0;
-    const ot    = parseFloat(form.querySelector("[name=ot_pay]").value) || 0;
-    const bonus = parseFloat(form.querySelector("[name=bonus]").value) || 0;
-    const ded   = parseFloat(form.querySelector("[name=deduction]").value) || 0;
-    const ss    = this.calcSS(base);
-    const tax   = this.calcTax(base, ot, bonus);
+    const base      = parseFloat(form.querySelector("[name=base_salary]").value) || 0;
+    const otHours   = parseFloat(form.querySelector("[name=ot_hours]").value)    || 0;
+    const otRate    = parseFloat(form.querySelector("[name=ot_rate]").value)     || 0;
+    const bonus     = parseFloat(form.querySelector("[name=bonus]").value)       || 0;
+    const ded       = parseFloat(form.querySelector("[name=deduction]").value)   || 0;
+    const ssEnrolled = form.querySelector("[name=ss_enrolled]").checked;
 
+    const otPay = this.calcOTPay(base, otHours, otRate);
+    const ss    = this.calcSS(base, ssEnrolled);
+    const tax   = this.calcTax(base, otPay, bonus);
+    const net   = this.calcNet(base, otPay, bonus, ss, tax, ded);
+
+    // อัปเดต ot_pay field
+    form.querySelector("[name=ot_pay]").value = otPay;
+
+    // อัปเดต display
     const ssEl  = document.getElementById("sal-ss-display");
     const taxEl = document.getElementById("sal-tax-display");
-    if (ssEl)  ssEl.textContent  = "฿" + ss.toLocaleString("th-TH");
+    const otEl  = document.getElementById("sal-ot-display");
+    if (ssEl)  ssEl.textContent  = ssEnrolled ? "฿" + ss.toLocaleString("th-TH") : "ไม่เข้าร่วม";
     if (taxEl) taxEl.textContent = "฿" + tax.toLocaleString("th-TH");
+    if (otEl)  otEl.textContent  = "฿" + otPay.toLocaleString("th-TH");
 
-    const net = Math.max(0, base + ot + bonus - ss - tax - ded);
     form.querySelector("[name=net_pay]").value = net.toFixed(0);
   },
 
   async save(form) {
-    const fd = new FormData(form);
+    const fd      = new FormData(form);
     const empId   = fd.get("emp_id");
     const emp     = STATE.employees.find(e => e.emp_id === empId);
     const empName = emp ? `${emp.first_name} ${emp.last_name}` : "";
-    const base  = parseFloat(fd.get("base_salary")) || 0;
-    const ot    = parseFloat(fd.get("ot_pay")) || 0;
-    const bonus = parseFloat(fd.get("bonus")) || 0;
-    const ded   = parseFloat(fd.get("deduction")) || 0;
-    const ss    = this.calcSS(base);
-    const tax   = this.calcTax(base, ot, bonus);
-    const net   = Math.max(0, base + ot + bonus - ss - tax - ded).toFixed(0);
+    const base    = parseFloat(fd.get("base_salary")) || 0;
+    const otHours = parseFloat(fd.get("ot_hours"))    || 0;
+    const otRate  = parseFloat(fd.get("ot_rate"))     || 0;
+    const otPay   = this.calcOTPay(base, otHours, otRate);
+    const bonus   = parseFloat(fd.get("bonus"))       || 0;
+    const ded     = parseFloat(fd.get("deduction"))   || 0;
+    const ssEnrolled = form.querySelector("[name=ss_enrolled]").checked;
+    const ss      = this.calcSS(base, ssEnrolled);
+    const tax     = this.calcTax(base, otPay, bonus);
+    const net     = this.calcNet(base, otPay, bonus, ss, tax, ded);
 
     const obj = {
-      month: fd.get("month"),
-      emp_id: empId,
-      emp_name: empName,
-      base_salary: String(base),
-      ot_pay: String(ot),
-      bonus: String(bonus),
-      deduction: String(ded),
-      net_pay: net,
+      month:          fd.get("month"),
+      emp_id:         empId,
+      emp_name:       empName,
+      base_salary:    String(base),
+      ot_pay:         String(otPay),
+      bonus:          String(bonus),
+      deduction:      String(ded),
+      net_pay:        net.toFixed(0),
       payment_status: fd.get("payment_status"),
-      notes: fd.get("notes")
+      notes:          fd.get("notes"),
+      ot_hours:       String(otHours),
+      ot_rate:        String(otRate),
+      ss_enrolled:    ssEnrolled ? "1" : "0"
     };
 
     const rowIndex = fd.get("row_index");
@@ -244,22 +299,27 @@ const SALARY = {
     }
   },
 
-  // ===== สลิปเงินเดือน =====
+  /* ── สลิปเงินเดือน ── */
   printPayslip(dataIndex) {
     const s = STATE.salary[dataIndex];
     if (!s) return;
-    const emp      = STATE.employees.find(e => String(e.emp_id) === String(s.emp_id));
-    const base     = parseFloat(s.base_salary) || 0;
-    const ot       = parseFloat(s.ot_pay) || 0;
-    const bonus    = parseFloat(s.bonus) || 0;
-    const otherDed = parseFloat(s.deduction) || 0;
-    const ss       = this.calcSS(base);
-    const tax      = this.calcTax(base, ot, bonus);
-    const net      = parseFloat(s.net_pay) || 0;
+    const emp       = STATE.employees.find(e => String(e.emp_id) === String(s.emp_id));
+    const base      = parseFloat(s.base_salary) || 0;
+    const ot        = parseFloat(s.ot_pay)      || 0;
+    const bonus     = parseFloat(s.bonus)       || 0;
+    const otherDed  = parseFloat(s.deduction)   || 0;
+    const ssEnrolled = s.ss_enrolled !== "0";
+    const ss        = this.calcSS(base, ssEnrolled);
+    const tax       = this.calcTax(base, ot, bonus);
+    const net       = parseFloat(s.net_pay)     || 0;
 
-    const w = window.open("", "_blank", "width=720,height=920");
+    const w = window.open("", "_blank", "width=720,height=960");
     if (!w) { showToast("⚠️ กรุณาอนุญาต Popup ในเบราว์เซอร์", "error"); return; }
-    w.document.write(this.getPayslipHTML({ s, emp, base, ot, bonus, otherDed, ss, tax, net }));
+    w.document.write(this.getPayslipHTML({
+      s, emp, base, ot, bonus, otherDed, ss, tax, net, ssEnrolled,
+      otHours: parseFloat(s.ot_hours) || 0,
+      otRate:  parseFloat(s.ot_rate)  || 0
+    }));
     w.document.close();
     setTimeout(() => w.print(), 600);
   },
@@ -272,7 +332,7 @@ const SALARY = {
     return `${months[parseInt(mo)||0]} ${parseInt(y)+543}`;
   },
 
-  getPayslipHTML({ s, emp, base, ot, bonus, otherDed, ss, tax, net }) {
+  getPayslipHTML({ s, emp, base, ot, bonus, otherDed, ss, tax, net, ssEnrolled, otHours, otRate }) {
     const gross    = base + ot + bonus;
     const totalDed = ss + tax + otherDed;
     const fmt      = n => Math.round(parseFloat(n)||0).toLocaleString("th-TH");
@@ -319,19 +379,21 @@ body{font-family:'Sarabun',Arial,sans-serif;font-size:13px;background:#f1f5f9;co
   <div class="emp-bar">
     <div class="emp-item"><label>ชื่อ-นามสกุล</label><strong>${s.emp_name||"-"}</strong></div>
     <div class="emp-item"><label>รหัสพนักงาน</label><strong>${s.emp_id}</strong></div>
-    <div class="emp-item"><label>ตำแหน่ง</label><strong>${emp&&emp.position?emp.position:"-"}</strong></div>
-    <div class="emp-item"><label>แผนก</label><strong>${emp&&emp.department?emp.department:"-"}</strong></div>
+    <div class="emp-item"><label>ตำแหน่ง</label><strong>${emp?.position||"-"}</strong></div>
+    <div class="emp-item"><label>แผนก</label><strong>${emp?.department||"-"}</strong></div>
   </div>
   <div class="sec">
     <div class="sec-hdr">รายได้</div>
     <div class="line"><span>เงินเดือนฐาน</span><span class="inc">฿${fmt(base)}</span></div>
-    ${ot>0?`<div class="line"><span>ค่าล่วงเวลา (OT)</span><span class="inc">฿${fmt(ot)}</span></div>`:""}
+    ${ot>0?`<div class="line"><span>ค่าล่วงเวลา (OT)<span class="note">${otHours} ชม. × ${otRate}x</span></span><span class="inc">฿${fmt(ot)}</span></div>`:""}
     ${bonus>0?`<div class="line"><span>โบนัส</span><span class="inc">฿${fmt(bonus)}</span></div>`:""}
     <div class="line sub"><span>รวมรายได้</span><span class="inc">฿${fmt(gross)}</span></div>
   </div>
   <div class="sec">
     <div class="sec-hdr">รายการหัก</div>
-    <div class="line"><span>ประกันสังคม (5%)<span class="note">เพดาน ฿750</span></span><span class="ded">-฿${fmt(ss)}</span></div>
+    ${ssEnrolled
+      ? `<div class="line"><span>ประกันสังคม (5%)<span class="note">เพดาน ฿750</span></span><span class="ded">-฿${fmt(ss)}</span></div>`
+      : `<div class="line"><span>ประกันสังคม</span><span style="color:#94a3b8;font-size:12px">ไม่เข้าร่วม</span></div>`}
     ${tax>0?`<div class="line"><span>ภาษีหัก ณ ที่จ่าย<span class="note">ประมาณการ</span></span><span class="ded">-฿${fmt(tax)}</span></div>`:""}
     ${otherDed>0?`<div class="line"><span>หักอื่นๆ</span><span class="ded">-฿${fmt(otherDed)}</span></div>`:""}
     <div class="line sub"><span>รวมรายการหัก</span><span class="ded">-฿${fmt(totalDed)}</span></div>
@@ -350,18 +412,22 @@ body{font-family:'Sarabun',Arial,sans-serif;font-size:13px;background:#f1f5f9;co
   },
 
   exportCSV(list) {
-    if (!list || !list.length) { showToast("ไม่มีข้อมูลสำหรับ Export", "error"); return; }
-    const headers = ["เดือน","รหัส","ชื่อ","เงินเดือนฐาน","OT","โบนัส","หัก","สุทธิ","สถานะ"];
+    if (!list?.length) { showToast("ไม่มีข้อมูลสำหรับ Export", "error"); return; }
+    const headers = ["เดือน","รหัส","ชื่อ","เงินเดือนฐาน","OT","โบนัส","หัก","สุทธิ","ประกันสังคม","สถานะ"];
     const rows = list.map(s => [
       s.month, s.emp_id, s.emp_name, s.base_salary, s.ot_pay,
-      s.bonus, s.deduction, s.net_pay, s.payment_status
+      s.bonus, s.deduction, s.net_pay,
+      s.ss_enrolled !== "0" ? "เข้าร่วม" : "ไม่เข้าร่วม",
+      s.payment_status
     ]);
     const csv = [headers, ...rows].map(r => r.join(",")).join("\n");
     const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement("a");
-    a.href = url; a.download = `salary_${document.getElementById("sal-month").value || "all"}.csv`;
-    a.click(); URL.revokeObjectURL(url);
+    a.href = url;
+    a.download = `salary_${document.getElementById("sal-month").value || "all"}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   },
 
   getCurrentList() {

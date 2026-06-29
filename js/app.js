@@ -3,91 +3,60 @@
  * จัดการ: auth, routing, global events
  */
 
-// ===== AUTH (No-auth mode using GAS Web App) =====
-// เนื่องจากใช้ Google Apps Script เป็น backend และ GAS จัดการ permission เอง
-// Frontend ใช้ simple login ด้วย Google Identity
-
-let tokenClient;
-let accessToken = null;
-const SCOPES = ""; // GAS ไม่ต้องการ scope จาก frontend
-
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
 });
 
 function initApp() {
+  bindEvents();
+  setDefaultFilters();
+
   // Check if script URL is configured
   if (CONFIG.SCRIPT_URL.includes("YOUR_SCRIPT_ID")) {
     showConfigError();
     return;
   }
 
-  // Check saved session
-  const savedUser = sessionStorage.getItem("hr_user");
-  if (savedUser) {
-    try {
-      STATE.currentUser = JSON.parse(savedUser);
-      showApp();
-    } catch {
-      showLoginScreen();
-    }
+  // Check saved session (sessionStorage หรือ localStorage ถ้าติ๊ก "จดจำฉัน")
+  const session = AUTH.getSession();
+  if (session) {
+    STATE.currentUser = session;
+    showApp();
   } else {
     showLoginScreen();
   }
-
-  bindEvents();
-  setDefaultFilters();
 }
 
 function showConfigError() {
-  document.getElementById("login-screen").innerHTML = `
-    <div class="login-card">
-      <div class="login-logo">
-        <i class="fas fa-exclamation-triangle" style="color:#d97706"></i>
-        <h1>ยังไม่ได้ตั้งค่า</h1>
-      </div>
-      <p style="color:#64748b;font-size:14px;line-height:1.8">
-        กรุณาแก้ไขไฟล์ <strong>js/config.js</strong> แล้วใส่ค่า:<br/>
-        • SCRIPT_URL จาก Google Apps Script<br/>
-        • SPREADSHEET_ID จาก Google Sheets<br/><br/>
-        ดูรายละเอียดได้ที่ <strong>README.md</strong>
-      </p>
+  document.getElementById("login-screen").querySelector(".login-form").innerHTML = `
+    <div style="background:#fef3c7;border-radius:10px;padding:16px;text-align:left;font-size:14px;line-height:1.9;color:#92400e">
+      <strong><i class="fas fa-exclamation-triangle"></i> ยังไม่ได้ตั้งค่า</strong><br/>
+      กรุณาแก้ไขไฟล์ <strong>js/config.js</strong> แล้วใส่ค่า:<br/>
+      • SCRIPT_URL จาก Google Apps Script<br/>
+      • SPREADSHEET_ID จาก Google Sheets<br/>
+      ดูรายละเอียดได้ที่ <strong>README.md</strong>
     </div>`;
 }
-
-// ===== SIMPLE AUTH (PIN / Google OAuth minimal) =====
-// สำหรับ demo: ใส่ชื่อเพื่อเข้าใช้งาน (production ควรเพิ่ม OAuth)
-document.getElementById("btn-login")?.addEventListener("click", async () => {
-  const name = prompt("กรอกชื่อผู้ใช้งาน (admin):");
-  if (!name) return;
-
-  const user = {
-    name: name,
-    email: name + "@farm.local",
-    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=2563eb&color=fff`
-  };
-
-  STATE.currentUser = user;
-  sessionStorage.setItem("hr_user", JSON.stringify(user));
-  showApp();
-});
 
 function showLoginScreen() {
   document.getElementById("login-screen").classList.remove("hidden");
   document.getElementById("app").classList.add("hidden");
+  // Reset form
+  document.getElementById("form-login")?.reset();
+  document.getElementById("login-username")?.focus();
 }
 
 async function showApp() {
   document.getElementById("login-screen").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
 
-  // Set user info
+  // Set user info in sidebar
   const u = STATE.currentUser;
   if (u) {
     document.getElementById("user-name").textContent = u.name;
-    document.getElementById("user-email").textContent = u.email;
     const avatar = document.getElementById("user-avatar");
     if (u.avatar) { avatar.src = u.avatar; avatar.style.display = "block"; }
+    AUTH.applyRoleUI();
   }
 
   // Load initial data
@@ -328,9 +297,7 @@ function bindEvents() {
 
   // Logout
   document.getElementById("btn-logout").addEventListener("click", () => {
-    sessionStorage.removeItem("hr_user");
-    STATE.currentUser = null;
-    showLoginScreen();
+    if (confirm("ออกจากระบบ?")) AUTH.logout();
   });
 
   // Modal close buttons
@@ -371,6 +338,8 @@ function bindEvents() {
     e.preventDefault();
     ATTENDANCE.save(e.target);
   });
+  // bind shift/time change events สำหรับ live calc
+  ATTENDANCE.bindFormEvents(document.getElementById("form-attendance"));
 
   // ===== SALARY =====
   document.getElementById("btn-add-salary").addEventListener("click", () => SALARY.openAdd());
